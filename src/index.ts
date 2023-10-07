@@ -1,11 +1,11 @@
-import { Main } from './pages/Login';
+import { Login } from './pages/Login';
 import { NotFound } from './pages/NotFound';
 import { Profile } from './pages/Profile';
 import './style.css'
 
 const ROUTES: Record<string, string> = {
-  '/': Main(),
-  '/profile': Profile(),
+  '/': Profile(),
+  '/main': Login(),
   '/not-found': NotFound(),
 }
 

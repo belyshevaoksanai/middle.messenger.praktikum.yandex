@@ -4,7 +4,7 @@ import { Link } from "../../components/Link";
 
 export const Profile = () => {
     return Handlebars.compile(tmpl)({
-        mainPageLink: Link({to: '/', text: 'Main'}),
+        mainPageLink: Link({to: '/main', text: 'Main'}),
         chatPageLink: Link({to: '/chat', text: 'Chat'}),
     });
 };
