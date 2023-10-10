@@ -5,7 +5,7 @@ import classes from './link.module.scss';
 interface LinkProps {
     to: string;
     text: string;
-    color: 'primary' | 'secondary'
+    color?: 'primary' | 'secondary'
 }
 
 const COLOR = {
