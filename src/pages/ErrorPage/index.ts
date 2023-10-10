@@ -1,6 +1,6 @@
 import Handlebars from "handlebars";
-import { tmpl } from "./error-page.tmpl";
-import classes from './error-page.module.scss';
+import { tmpl } from "./errorPage.tmpl";
+import classes from './errorPage.module.scss';
 import { Link } from "../../components/Link";
 
 export const ErrorPage = () => {
