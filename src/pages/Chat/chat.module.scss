@@ -1,0 +1,37 @@
+.dialogContainer {
+    width: 310px;
+    border-right: 1px solid #EAEAEA;
+    padding: 10px;
+    background-color: #FBFBFB;
+}
+
+.chatContainer {
+    display: flex;
+    flex-grow: 1;
+}
+
+.chatPage {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.linkContainer {
+    display: flex;
+    justify-content: end;
+    padding: 21px 0px;
+    gap: 8px;
+    align-items: baseline;
+}
+
+.dialogList {
+    margin-top: 14px;
+}
+
+.emptyChat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: #999999;
+}

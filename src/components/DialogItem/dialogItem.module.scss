@@ -1,0 +1,18 @@
+.dialogContainer {
+    border-top: 1px solid #EAEAEA;
+    padding: 13px 0px;
+    display: flex;
+    gap: 10px;
+    background: #FBFBFB;
+}
+
+.dialogInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dialogTitle {
+    color: #1E1E1E;
+    font-weight: 600;
+}

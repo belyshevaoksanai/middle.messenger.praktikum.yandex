@@ -1,22 +1,21 @@
 export const tmpl = `
     <div class="{{classes.registration}}">
-        <div>
+        <div class="{{classes.registrationContainer}}">
             <div class="{{classes.titleContainer}}">
-                <img src="{{editAvatar}}"/>
-                <span>{{{title}}}</span>
+                {{{title}}}
             </div>
             <div class="{{classes.registrationForm}}">
                 {{{inputEmail}}}
                 {{{inputLogin}}}
                 {{{inputName}}}
                 {{{inputSecondName}}}
-                {{{inputNameChat}}} 
                 {{{inputPhone}}}
+                {{{inputPassword}}}
+                {{{inputConfirmPassword}}}
             </div>
             <div class="{{classes.actionContainer}}">
-                {{{buttonChangeData}}}
-                {{{buttonChangePassword}}}
-                {{{buttonExit}}}
+                {{{buttonRegistration}}}
+                {{{buttonSignIn}}}
             </div>
         </div>
     </div>
