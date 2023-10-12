@@ -1,3 +1,3 @@
 export const tmpl = `
-    <button style="width: {{width}}" class="{{buttonClass}}">{{label}}</button>
+    <button type="button" style="width: {{width}}" class="{{buttonClass}}">{{label}}</button>
 `

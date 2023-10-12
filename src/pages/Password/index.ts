@@ -8,9 +8,9 @@ import editAvatar from "../../assets/images/edit-avatar.svg";
 export const Password = () => {
     return Handlebars.compile(tmpl)({
         classes,
-        inputOldPassword: Input({label: 'Старый пароль'}),
-        inputNewPassword: Input({label: 'Новый пароль'}),
-        inputConfirmPassword: Input({label: 'Повторите новый пароль'}),
+        inputOldPassword: Input({label: 'Старый пароль', name: 'oldPassword'}),
+        inputNewPassword: Input({label: 'Новый пароль', name: 'newPassword'}),
+        inputConfirmPassword: Input({label: 'Повторите новый пароль', name: 'confirmPassword'}),
         buttonSave: LinkButton({label: 'Сохранить', to: '/profile'}),
         buttonCancel: LinkButton({label: 'Отмена', to: '/profile'}),
         editAvatar,

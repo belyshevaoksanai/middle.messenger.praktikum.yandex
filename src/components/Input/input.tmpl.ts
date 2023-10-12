@@ -3,6 +3,6 @@ export const tmpl = `
         {{#if label}}
             <label class="{{classes.label}}">{{label}}</label>
         {{/if}}
-        <input class="{{inputClass}}" placeholder="{{placeholder}}"/>
+        <input class="{{inputClass}}" placeholder="{{placeholder}}" name="{{name}}"/>
     </div>
 `

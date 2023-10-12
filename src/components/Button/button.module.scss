@@ -5,8 +5,8 @@
     border: none;
     cursor: pointer;
     
-    background-color: #3369F3;
-    color: #FFFFFF;
+    background-color: $accenct-color;
+    color: $white;
     font-weight: 500;
     line-height: 13px;
     font-size: 13px;
@@ -23,7 +23,7 @@
     border: none;
     cursor: pointer;
 
-    color: #3369F3;
+    color: $accenct-color;
     background: none;
     border: none;
     font-size: 11px;
