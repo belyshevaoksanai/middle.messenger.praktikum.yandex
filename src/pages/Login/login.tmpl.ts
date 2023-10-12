@@ -1,6 +1,6 @@
 export const tmpl = `
     <div class="{{classes.login}}">
-        <div class="{{classes.loginContainer}}">
+        <form class="{{classes.loginContainer}}">
             <div class="{{classes.titleContainer}}">
                 {{{title}}}
             </div>
@@ -12,6 +12,6 @@ export const tmpl = `
                 {{{buttonAuth}}}
                 {{{buttonRegistration}}}
             </div>
-        </div>
+        </form>
     </div>
 `

@@ -9,13 +9,13 @@ export const Registration = () => {
     return Handlebars.compile(tmpl)({
         classes,
         title: Title({text: 'Регистрация'}),
-        inputEmail: Input({label: 'Почта'}),
-        inputLogin: Input({label: 'Логин'}),
-        inputName: Input({label: 'Имя'}),
-        inputSecondName: Input({label: 'Фамилия'}),
-        inputPhone: Input({label: 'Телефон'}),
-        inputPassword: Input({label: 'Пароль'}),
-        inputConfirmPassword: Input({label: 'Пароль (ещё раз)'}),
+        inputEmail: Input({label: 'Почта', name: 'email'}),
+        inputLogin: Input({label: 'Логин', name: 'login'}),
+        inputName: Input({label: 'Имя', name: 'first_name'}),
+        inputSecondName: Input({label: 'Фамилия', name: 'second_name'}),
+        inputPhone: Input({label: 'Телефон', name: 'phone'}),
+        inputPassword: Input({label: 'Пароль', name: 'password'}),
+        inputConfirmPassword: Input({label: 'Пароль (ещё раз)', name: 'confirmPassword'}),
         buttonRegistration: LinkButton({label: 'Зарегистрироваться', to: '/chat'}),
         buttonSignIn: LinkButton({label: 'Войти', variant: 'text', to: '/login'})
     });

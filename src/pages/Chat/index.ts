@@ -12,7 +12,7 @@ export const Chat = () => {
         classes,
         linkProfile: Link({text: 'Профиль', to: '/profile'}),
         arrowUrl,
-        inputSearch: Input({variant: 'filled', placeholder: 'Поиск'}),
+        inputSearch: Input({variant: 'filled', placeholder: 'Поиск', name: 'message'}),
         chatDialogs: CHAT_DATA.map((chat) => DialogItem(chat)).join(''),
     });
 };

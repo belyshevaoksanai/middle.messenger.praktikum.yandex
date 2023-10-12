@@ -1,6 +1,6 @@
 export const tmpl = `
     <div class="{{classes.registration}}">
-        <div>
+        <form>
             <div class="{{classes.titleContainer}}">
                 <img src="{{editAvatar}}"  class="{{classes.avatarImg}}"/>
             </div>
@@ -13,6 +13,6 @@ export const tmpl = `
                 {{{buttonSave}}}
                 {{{buttonCancel}}}
             </div>
-        </div>
+        </form>
     </div>
 `

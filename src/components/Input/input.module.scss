@@ -5,7 +5,7 @@
 }
 
 .label {
-    color: #999999;
+    color: $label-color;
     line-height: 9px;
     font-size: 9px;
     padding-bottom: 8px;
@@ -13,7 +13,7 @@
 
 .standard {
     border: none;
-    border-bottom: 1px solid #3369F3;
+    border-bottom: 1px solid $accenct-color;
     width: 100%;
     outline: none;
     padding: 3px 0px;
@@ -25,7 +25,7 @@
     width: 100%;
     outline: none;
     padding: 6px 3px;
-    background: #EFEFEF;
+    background: $input-color;
     box-sizing: border-box;
 }
 
