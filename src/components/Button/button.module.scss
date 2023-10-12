@@ -1,0 +1,39 @@
+.filled {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    
+    background-color: $accenct-color;
+    color: $white;
+    font-weight: 500;
+    line-height: 13px;
+    font-size: 13px;
+}
+
+.filled:focus {
+    outline: none;
+}
+
+.text {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+
+    color: $accenct-color;
+    background: none;
+    border: none;
+    font-size: 11px;
+    line-height: 11px;
+}
+
+.text:hover {
+    background: rgba(25, 118, 210, 0.04);
+}
+
+.text:focus {
+    outline: none;
+}
