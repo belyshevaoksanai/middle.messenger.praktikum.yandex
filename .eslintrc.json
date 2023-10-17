@@ -10,5 +10,10 @@
     "parserOptions": {
         "project": "./tsconfig.json"
     },
-    "rules": {}
+    "rules": {
+        "no-underscore-dangle": "off",
+        "class-methods-use-this": "off",
+        "no-param-reassign": "off",
+        "@typescript-eslint/no-unused-vars": "off"
+    }
 }
