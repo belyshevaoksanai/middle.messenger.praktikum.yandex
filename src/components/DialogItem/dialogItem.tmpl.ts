@@ -1,4 +1,4 @@
-export const tmpl = `
+const tmpl = `
     <div class="{{classes.dialogContainer}}">
         <img src="{{emtyAvatarUrl}}" />
         <div class="{{classes.dialogInfo}}">
@@ -6,4 +6,6 @@ export const tmpl = `
             <span class="{{classes.dialogMessage}}">{{text}}</span>
         </div>
     </div>
-`
+`;
+
+export default tmpl;

@@ -1,4 +1,4 @@
-export const tmpl = `
+const tmpl = `
     <div class="{{classes.login}}">
         <form class="{{classes.loginContainer}}">
             <div class="{{classes.titleContainer}}">
@@ -14,4 +14,6 @@ export const tmpl = `
             </div>
         </form>
     </div>
-`
+`;
+
+export default tmpl;

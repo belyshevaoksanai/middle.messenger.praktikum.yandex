@@ -1,4 +1,4 @@
-export const tmpl = `
+const tmpl = `
     <div class="{{classes.titleContainer}}">
         <h1 class="{{classes.title}}">500</h1>
         <h1 class="{{classes.subtitle}}">Мы уже фиксим</h1>
@@ -7,3 +7,5 @@ export const tmpl = `
         </div>
     </div>
 `;
+
+export default tmpl;

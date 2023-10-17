@@ -1,4 +1,4 @@
-export const tmpl = `
+const tmpl = `
     <div class="{{classes.chatPage}}">
         <div class="{{classes.dialogContainer}}">
             <div class="{{classes.linkContainer}}">
@@ -18,4 +18,6 @@ export const tmpl = `
             </div>
         </div>
     </div>
-`
+`;
+
+export default tmpl;
