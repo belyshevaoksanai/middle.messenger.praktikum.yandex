@@ -6,6 +6,7 @@ import Button from '../../../components/Button';
 import LinkButton from '../../../components/LinkButton';
 import Form from '../../../components/Form';
 import { required } from '../../../utils/validate';
+import LoginFormModel from './LoginForm.model';
 
 class LoginForm extends Form {
   init(): void {
@@ -30,7 +31,7 @@ class LoginForm extends Form {
     });
   }
 
-  submit(values: any): void {
+  submit(values: LoginFormModel): void {
     console.log('form value:');
     console.log(values);
   }

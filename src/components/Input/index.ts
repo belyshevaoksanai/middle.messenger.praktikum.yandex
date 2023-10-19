@@ -32,9 +32,10 @@ class Input extends Block<TypeWithClass<InputProps>> {
       events: {
         blur: () => {
           if (this.props.validate) {
-            const error = this.props.validate(
-              ((this.children.input as Block).element as any as HTMLInputElement).value,
-            );
+            const inputBlock = this.children.input as Block;
+            const element = inputBlock.element as HTMLInputElement;
+            const { value } = element;
+            const error = this.props.validate(value);
             this.isValid = !error;
             (this.children.error as Block).setProps({ text: error });
           }

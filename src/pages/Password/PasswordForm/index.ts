@@ -7,6 +7,7 @@ import LinkButton from '../../../components/LinkButton';
 import editAvatar from '../../../assets/images/edit-avatar.svg';
 import Form from '../../../components/Form';
 import { required, validatePassword } from '../../../utils/validate';
+import PasswordFormModel from './PasswordForm.model';
 
 class PasswordForm extends Form {
   init(): void {
@@ -35,7 +36,7 @@ class PasswordForm extends Form {
     });
   }
 
-  submit(values: any): void {
+  submit(values: PasswordFormModel): void {
     console.log('form value:');
     console.log(values);
   }

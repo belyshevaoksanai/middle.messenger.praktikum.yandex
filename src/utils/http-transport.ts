@@ -6,15 +6,17 @@ enum METHOD {
   DELETE = 'DELETE',
 }
 
-type Options = {
+type Options<Data> = {
   method: string;
-  data?: any;
+  data?: Data;
   timeout?: number;
 };
 
-type OptionsWithoutMethod = Omit<Options, 'method'>;
+type OptionsWithoutMethod<Data> = Omit<Options<Data>, 'method'>;
 
-function queryStringify(data: Record<string, any>) {
+type DataType = Record<string, any>;
+
+function queryStringify(data?: DataType) {
   if (!data) {
     return '';
   }
@@ -25,10 +27,10 @@ function queryStringify(data: Record<string, any>) {
     .join('&')}`;
 }
 
-class HTTPTransport {
+class HTTPTransport<Data extends DataType> {
   request<TResponse>(
     url: string,
-    options: Options = { method: METHOD.GET },
+    options: Options<Data> = { method: METHOD.GET },
     timeout = 5000,
   ): Promise<TResponse> {
     const { method, data } = options;
@@ -55,7 +57,7 @@ class HTTPTransport {
     });
   }
 
-  get<TResponse>(url: string, options: OptionsWithoutMethod = {}): Promise<TResponse> {
+  get<TResponse>(url: string, options: OptionsWithoutMethod<Data> = {}): Promise<TResponse> {
     return this.request(
       `${url}${queryStringify(options.data)}`,
       { ...options, method: METHOD.GET },
@@ -63,7 +65,7 @@ class HTTPTransport {
     );
   }
 
-  post<TResponse>(url: string, options: OptionsWithoutMethod = {}): Promise<TResponse> {
+  post<TResponse>(url: string, options: OptionsWithoutMethod<Data> = {}): Promise<TResponse> {
     return this.request(
       url,
       { ...options, method: METHOD.POST },
@@ -71,7 +73,7 @@ class HTTPTransport {
     );
   }
 
-  put<TResponse>(url: string, options: OptionsWithoutMethod = {}): Promise<TResponse> {
+  put<TResponse>(url: string, options: OptionsWithoutMethod<Data> = {}): Promise<TResponse> {
     return this.request(
       url,
       { ...options, method: METHOD.PUT },
@@ -79,7 +81,7 @@ class HTTPTransport {
     );
   }
 
-  delete<TResponse>(url: string, options: OptionsWithoutMethod = {}): Promise<TResponse> {
+  delete<TResponse>(url: string, options: OptionsWithoutMethod<Data> = {}): Promise<TResponse> {
     return this.request(
       url,
       { ...options, method: METHOD.DELETE },

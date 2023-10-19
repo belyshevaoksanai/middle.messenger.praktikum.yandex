@@ -3,7 +3,6 @@ import { nanoid } from 'nanoid';
 
 import EventBus from './event-bus';
 
-// Нельзя создавать экземпляр данного класса
 class Block<P extends Record<string, any> = any> {
   static EVENTS = {
     INIT: 'init',
@@ -139,7 +138,6 @@ class Block<P extends Record<string, any> = any> {
   private _render() {
     const fragment = this.render();
 
-    // TODO remove listeners
     this._element!.innerHTML = '';
 
     this._element!.append(fragment);
@@ -151,7 +149,7 @@ class Block<P extends Record<string, any> = any> {
     this._addEvents();
   }
 
-  protected compile(template: string, context: any) {
+  protected compile(template: string, context: Record<string, any>) {
     const contextAndStubs = { ...context };
 
     Object.entries(this.children).forEach(([name, component]) => {

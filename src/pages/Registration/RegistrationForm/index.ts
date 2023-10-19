@@ -8,6 +8,7 @@ import Form from '../../../components/Form';
 import {
   required, validateLogin, validateName, validatePassword, validatePhone,
 } from '../../../utils/validate';
+import RegistrationFormModel from './RegistartionForm.model';
 
 class RegistrationForm extends Form {
   init(): void {
@@ -52,7 +53,7 @@ class RegistrationForm extends Form {
     });
   }
 
-  submit(values: any): void {
+  submit(values: RegistrationFormModel): void {
     console.log('form value:');
     console.log(values);
   }

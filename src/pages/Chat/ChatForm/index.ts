@@ -5,6 +5,7 @@ import IconButton from '../../../components/IconButton';
 import sendIcon from '../../../assets/icons/arrow-right-2.svg';
 import Form from '../../../components/Form';
 import { required } from '../../../utils/validate';
+import ChatFormModel from './ChatForm.model';
 
 class ChatForm extends Form {
   init(): void {
@@ -19,7 +20,7 @@ class ChatForm extends Form {
     });
   }
 
-  submit(values: any): void {
+  submit(values: ChatFormModel): void {
     console.log('form value:');
     console.log(values);
   }
