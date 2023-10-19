@@ -16,7 +16,7 @@ class Block<P extends Record<string, any> = any> {
 
   protected props: P;
 
-  public children: Record<string, Block>;
+  public children: Record<string, Block | Block[]>;
 
   private eventBus: () => EventBus;
 
@@ -44,12 +44,15 @@ class Block<P extends Record<string, any> = any> {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  private _getChildrenAndProps(childrenAndProps: P): { props: P, children: Record<string, Block> } {
+  private _getChildrenAndProps(childrenAndProps: P)
+    : { props: P, children: Record<string, Block | Block[]> } {
     const props: Record<string, unknown> = {};
-    const children: Record<string, Block> = {};
+    const children: Record<string, Block | Block[]> = {};
 
     Object.entries(childrenAndProps).forEach(([key, value]) => {
       if (value instanceof Block) {
+        children[key as string] = value;
+      } else if (Array.isArray(value) && value[0] instanceof Block) {
         children[key as string] = value;
       } else {
         props[key] = value;
@@ -98,17 +101,26 @@ class Block<P extends Record<string, any> = any> {
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
-    Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
+    Object.values(this.children).forEach((child) => {
+      if (Array.isArray(child)) {
+        child.forEach((item) => item.dispatchComponentDidMount());
+      } else {
+        child.dispatchComponentDidMount();
+      }
+    });
   }
 
-  private _componentDidUpdate(oldProps: P, newProps: P) {
-    if (this.componentDidUpdate(oldProps, newProps)) {
+  // private _componentDidUpdate(oldProps: P, newProps: P) {
+  private _componentDidUpdate() {
+    // if (this.componentDidUpdate(oldProps, newProps)) {
+    if (this.componentDidUpdate()) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
   // TODO в 3 спринте
-  protected componentDidUpdate(oldProps: P, newProps: P) {
+  // protected componentDidUpdate(oldProps: P, newProps: P) {
+  protected componentDidUpdate() {
     return true;
   }
 
@@ -132,6 +144,30 @@ class Block<P extends Record<string, any> = any> {
 
     this._element!.append(fragment);
 
+    if (this.props.name && this._meta.tagName === 'input') {
+      (this._element as HTMLInputElement)!.name = this.props.name;
+    }
+
+    if (this.props.placeholder && this._meta.tagName === 'input') {
+      (this._element as HTMLInputElement)!.placeholder = this.props.placeholder;
+    }
+
+    if (this.props.class) {
+      this._element!.classList.add(this.props.class);
+    }
+
+    if (this.props.color) {
+      this._element!.style.color = this.props.color;
+    }
+
+    if (this.props.type) {
+      (this._element as HTMLButtonElement)!.type = this.props.type;
+    }
+
+    if (this.props.href) {
+      (this._element as HTMLAnchorElement)!.href = this.props.href;
+    }
+
     this._addEvents();
   }
 
@@ -139,7 +175,11 @@ class Block<P extends Record<string, any> = any> {
     const contextAndStubs = { ...context };
 
     Object.entries(this.children).forEach(([name, component]) => {
-      contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+      if (Array.isArray(component)) {
+        contextAndStubs[name] = component.map((item) => `<div data-id="${item.id}"></div>`).join('');
+      } else {
+        contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+      }
     });
 
     const html = Handlebars.compile(template)(contextAndStubs);
@@ -149,15 +189,23 @@ class Block<P extends Record<string, any> = any> {
     temp.innerHTML = html;
 
     Object.entries(this.children).forEach(([_, component]) => {
-      const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
+      const replaceStub = (comp: Block) => {
+        const stub = temp.content.querySelector(`[data-id="${comp.id}"]`);
 
-      if (!stub) {
-        return;
+        if (!stub) {
+          return;
+        }
+
+        comp.getContent()?.append(...Array.from(stub.childNodes));
+
+        stub.replaceWith(comp.getContent()!);
+      };
+
+      if (Array.isArray(component)) {
+        component.forEach((item) => replaceStub(item));
+      } else {
+        replaceStub(component);
       }
-
-      component.getContent()?.append(...Array.from(stub.childNodes));
-
-      stub.replaceWith(component.getContent()!);
     });
 
     return temp.content;

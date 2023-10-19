@@ -1,22 +1,21 @@
-import Handlebars from 'handlebars';
-import tmpl from './registration.tmpl';
+import Block from '../../utils/block';
 import classes from './registration.module.scss';
-import Title from '../../components/Title';
-import Input from '../../components/Input';
-import LinkButton from '../../components/LinkButton';
+import RegistrationForm from './RegistrationForm';
 
-const Registration = () => Handlebars.compile(tmpl)({
-  classes,
-  title: Title({ text: 'Регистрация' }),
-  inputEmail: Input({ label: 'Почта', name: 'email' }),
-  inputLogin: Input({ label: 'Логин', name: 'login' }),
-  inputName: Input({ label: 'Имя', name: 'first_name' }),
-  inputSecondName: Input({ label: 'Фамилия', name: 'second_name' }),
-  inputPhone: Input({ label: 'Телефон', name: 'phone' }),
-  inputPassword: Input({ label: 'Пароль', name: 'password' }),
-  inputConfirmPassword: Input({ label: 'Пароль (ещё раз)', name: 'confirmPassword' }),
-  buttonRegistration: LinkButton({ label: 'Зарегистрироваться', to: '/chat' }),
-  buttonSignIn: LinkButton({ label: 'Войти', variant: 'text', to: '/login' }),
-});
+class Registration extends Block {
+  constructor() {
+    super('div', {
+      class: classes.registration,
+    });
+  }
+
+  init(): void {
+    this.children.form = new RegistrationForm();
+  }
+
+  protected render(): DocumentFragment {
+    return this.compile('{{{form}}}', this.props);
+  }
+}
 
 export default Registration;

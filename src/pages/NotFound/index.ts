@@ -1,11 +1,25 @@
-import Handlebars from 'handlebars';
+import Block from '../../utils/block';
 import tmpl from './not-found.tmpl';
 import classes from './not-found.module.scss';
 import Link from '../../components/Link';
 
-const NotFound = () => Handlebars.compile(tmpl)({
-  classes,
-  link: Link({ text: 'Назад к чатам', to: '/chat', color: 'secondary' }),
-});
+class NotFound extends Block {
+  constructor() {
+    super('div', {
+      class: classes.registration,
+    });
+  }
+
+  init(): void {
+    this.children.link = new Link({
+      to: '/chat',
+      text: 'Назад к чатам',
+    });
+  }
+
+  protected render(): DocumentFragment {
+    return this.compile(tmpl(classes), this.props);
+  }
+}
 
 export default NotFound;

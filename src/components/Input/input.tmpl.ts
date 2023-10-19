@@ -1,9 +1,10 @@
-const tmpl = `
-    <div class="{{classes.inputContainer}}">
+const tmpl = (classes: Record<string, string>) => `
+    <div class="${classes.inputContainer}">
         {{#if label}}
-            <label class="{{classes.label}}">{{label}}</label>
+            <label class="${classes.label}">{{label}}</label>
         {{/if}}
-        <input class="{{inputClass}}" placeholder="{{placeholder}}" name="{{name}}"/>
+        {{{input}}}
+        {{{error}}}
     </div>
 `;
 

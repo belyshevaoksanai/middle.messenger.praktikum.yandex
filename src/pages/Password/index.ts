@@ -1,18 +1,21 @@
-import Handlebars from 'handlebars';
-import tmpl from './password.tmpl';
 import classes from './password.module.scss';
-import Input from '../../components/Input';
-import LinkButton from '../../components/LinkButton';
-import editAvatar from '../../assets/images/edit-avatar.svg';
+import Block from '../../utils/block';
+import PasswordForm from './PasswordForm';
 
-const Password = () => Handlebars.compile(tmpl)({
-  classes,
-  inputOldPassword: Input({ label: 'Старый пароль', name: 'oldPassword' }),
-  inputNewPassword: Input({ label: 'Новый пароль', name: 'newPassword' }),
-  inputConfirmPassword: Input({ label: 'Повторите новый пароль', name: 'confirmPassword' }),
-  buttonSave: LinkButton({ label: 'Сохранить', to: '/profile' }),
-  buttonCancel: LinkButton({ label: 'Отмена', to: '/profile' }),
-  editAvatar,
-});
+class Password extends Block {
+  constructor() {
+    super('div', {
+      class: classes.registration,
+    });
+  }
+
+  init(): void {
+    this.children.form = new PasswordForm();
+  }
+
+  protected render(): DocumentFragment {
+    return this.compile('{{{form}}}', this.props);
+  }
+}
 
 export default Password;

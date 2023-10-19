@@ -4,28 +4,3 @@
     justify-content: center;
     height: 100vh;
 }
-
-.registrationContainer {
-    box-shadow: 0 0 6px 0 $shadow-color;
-    padding: 50px 30px;
-}
-
-.registrationForm {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 280px;
-    margin-top: 60px;
-    margin-bottom: 75px;
-}
-
-.actionContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.titleContainer {
-    display: flex;
-    justify-content: center;
-}

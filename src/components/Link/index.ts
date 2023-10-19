@@ -1,5 +1,4 @@
-import Handlebars from 'handlebars';
-import tmpl from './link.tmpl';
+import Block from '../../utils/block';
 import classes from './link.module.scss';
 
 interface LinkProps {
@@ -13,10 +12,19 @@ const COLOR = {
   secondary: '#3369F3',
 };
 
-const Link = (props: LinkProps) => Handlebars.compile(tmpl)({
-  ...props,
-  classes,
-  color: COLOR[props.color || 'primary'],
-});
+class Link extends Block {
+  constructor(props: LinkProps) {
+    super('a', {
+      ...props,
+      href: props.to,
+      class: classes.link,
+      color: COLOR[props.color || 'primary'],
+    });
+  }
+
+  render() {
+    return this.compile('{{text}}', this.props);
+  }
+}
 
 export default Link;

@@ -1,4 +1,4 @@
-import Handlebars from 'handlebars';
+import Block from '../../utils/block';
 import tmpl from './dialogItem.tmpl';
 import emtyAvatarUrl from '../../assets/images/empty-avatar.svg';
 import classes from './dialogItem.module.scss';
@@ -7,8 +7,12 @@ export interface DialogItemProps {
   name: string;
 }
 
-export const DialogItem = (props: DialogItemProps) => Handlebars.compile(tmpl)({
-  ...props,
-  classes,
-  emtyAvatarUrl,
-});
+export class DialogItem extends Block {
+  constructor(props: DialogItemProps) {
+    super('div', props);
+  }
+
+  protected render(): DocumentFragment {
+    return this.compile(tmpl(classes, emtyAvatarUrl), this.props);
+  }
+}

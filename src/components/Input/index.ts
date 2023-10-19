@@ -1,18 +1,51 @@
-import Handlebars from 'handlebars';
-import tmpl from './input.tmpl';
+import Block from '../../utils/block';
+import InputError from './Error';
+import InputField from './InputField';
 import classes from './input.module.scss';
+import tmpl from './input.tmpl';
 
 interface InputProps {
   label?: string;
-  variant?: 'standard' | 'filled';
-  placeholder?: string;
   name: string;
+  variant?: 'standard' | 'filled';
+  events?: {
+    focus?: () => void;
+  }
+  validate?: (value: string) => string;
 }
 
-const Input = (props: InputProps) => Handlebars.compile(tmpl)({
-  ...props,
-  classes,
-  inputClass: classes[props.variant || 'standard'],
-});
+class Input extends Block {
+  isValid: boolean = true;
+
+  constructor(props: InputProps) {
+    super('div', {
+      ...props,
+      class: classes.inputContainer,
+    });
+  }
+
+  init(): void {
+    this.children.input = new InputField({
+      ...this.props,
+      events: {
+        blur: () => {
+          if (this.props.validate) {
+            const error = this.props.validate(
+              ((this.children.input as Block).element as any as HTMLInputElement).value,
+            );
+            this.isValid = !error;
+            (this.children.error as Block).setProps({ text: error });
+          }
+        },
+      },
+    });
+
+    this.children.error = new InputError({ text: '' });
+  }
+
+  render() {
+    return this.compile(tmpl(classes), this.props);
+  }
+}
 
 export default Input;

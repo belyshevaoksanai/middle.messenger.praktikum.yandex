@@ -1,0 +1,21 @@
+.standard {
+    border: none;
+    border-bottom: 1px solid $accenct-color;
+    width: 100%;
+    outline: none;
+    padding: 3px 0;
+}
+
+.filled {
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    outline: none;
+    padding: 6px 3px;
+    background: $input-color;
+    box-sizing: border-box;
+}
+
+.filled::placeholder {
+    text-align: center;
+}
