@@ -6,6 +6,7 @@ import Link from '../../components/Link';
 import Input from '../../components/Input';
 import CHAT_DATA from './mock';
 import { DialogItem } from '../../components/DialogItem';
+import ChatForm from './ChatForm';
 
 export class Chat extends Block {
   constructor() {
@@ -24,6 +25,7 @@ export class Chat extends Block {
       name: 'search',
     });
     this.children.chatDialogs = CHAT_DATA.map((chat) => new DialogItem(chat));
+    this.children.form = new ChatForm();
   }
 
   protected render(): DocumentFragment {

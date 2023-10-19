@@ -8,6 +8,7 @@
 .chatContainer {
     display: flex;
     flex-grow: 1;
+    flex-direction: column;
 }
 
 .chatPage {
@@ -34,4 +35,5 @@
     justify-content: center;
     width: 100%;
     color: $label-color;
+    flex-grow: 1;
 }
