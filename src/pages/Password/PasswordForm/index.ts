@@ -6,6 +6,7 @@ import Button from '../../../components/Button';
 import LinkButton from '../../../components/LinkButton';
 import editAvatar from '../../../assets/images/edit-avatar.svg';
 import Form from '../../../components/Form';
+import { required, validatePassword } from '../../../utils/validate';
 
 class PasswordForm extends Form {
   constructor() {
@@ -32,26 +33,17 @@ class PasswordForm extends Form {
     this.children.inputOldPassword = new Input({
       label: 'Старый пароль',
       name: 'oldPassword',
-      validate: (value: string) => (value.length > 0
-        ? ''
-        : 'Обязательно для заполнения'),
+      validate: required,
     });
     this.children.inputNewPassword = new Input({
       label: 'Новый пароль',
       name: 'newPassword',
-      validate: (value: string) => {
-        const regexp = /^.*(([A-Z].*[\d])|([\d].*[A-Z])).*$/;
-        return regexp.test(value)
-          ? ''
-          : 'Длина пароля от 8 до 40 символов. Обязательно должен сдержать заглавную букву и цифру.';
-      },
+      validate: validatePassword,
     });
     this.children.inputConfirmPassword = new Input({
       label: 'Повторите новый пароль',
       name: 'confirmPassword',
-      validate: (value: string) => (value.length > 0
-        ? ''
-        : 'Обязательно для заполнения'),
+      validate: required,
     });
     this.children.buttonSave = new Button({
       label: 'Сохранить',

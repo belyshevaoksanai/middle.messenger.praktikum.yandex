@@ -5,6 +5,7 @@ import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import LinkButton from '../../../components/LinkButton';
 import Form from '../../../components/Form';
+import { required } from '../../../utils/validate';
 
 class LoginForm extends Form {
   constructor() {
@@ -32,16 +33,12 @@ class LoginForm extends Form {
     this.children.inputLogin = new Input({
       label: 'Логин',
       name: 'login',
-      validate: (value: string) => (value.length > 0
-        ? ''
-        : 'Обязательное для заполнения'),
+      validate: required,
     });
     this.children.inputPassword = new Input({
       label: 'Пароль',
       name: 'password',
-      validate: (value: string) => (value.length > 0
-        ? ''
-        : 'Обязательное для заполнения'),
+      validate: required,
     });
     this.children.buttonAuth = new Button({
       label: 'Авторизоваться',

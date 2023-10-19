@@ -6,6 +6,9 @@ import Button from '../../../components/Button';
 import LinkButton from '../../../components/LinkButton';
 import editAvatar from '../../../assets/images/edit-avatar.svg';
 import Form from '../../../components/Form';
+import {
+  validateEmail, validateLogin, validateName, validatePhone,
+} from '../../../utils/validate';
 
 class ProfileForm extends Form {
   constructor() {
@@ -32,42 +35,22 @@ class ProfileForm extends Form {
     this.children.inputEmail = new Input({
       label: 'Почта',
       name: 'email',
-      validate: (value: string) => {
-        const regexp = /^[A-Za-z-_\d]+@[A-Za-z-_\d]+\.[A-Za-z-_\d]+$/;
-        return regexp.test(value)
-          ? ''
-          : 'Некорректный email';
-      },
+      validate: validateEmail,
     });
     this.children.inputLogin = new Input({
       label: 'Логин',
       name: 'login',
-      validate: (value: string) => {
-        const regexp = /^[\da-zA-Z_-]*[a-zA-Z][\da-zA-Z_-]*$/;
-        return regexp.test(value) && value.length >= 3 && value.length <= 20
-          ? ''
-          : 'Длина логина от 3 до 20 символов. Допустимые символы: латиница, цифры, дефис и нижнее подчёркивание. Должен содержать хотя бы одну букву';
-      },
+      validate: validateLogin,
     });
     this.children.inputName = new Input({
       label: 'Имя',
       name: 'first_name',
-      validate: (value: string) => {
-        const regexp = /^[A-ZА-Я][a-zA-Zа-я-А-Я-]*$/;
-        return regexp.test(value)
-          ? ''
-          : 'Допустимые символы: латиница, кириллица, дефис. Первая буква должна быть заглавной.';
-      },
+      validate: validateName,
     });
     this.children.inputSecondName = new Input({
       label: 'Фамилия',
       name: 'second_name',
-      validate: (value: string) => {
-        const regexp = /^[A-ZА-Я][a-zA-Zа-я-А-Я-]*$/;
-        return regexp.test(value)
-          ? ''
-          : 'Допустимые символы: латиница, кириллица, дефис. Первая буква должна быть заглавной.';
-      },
+      validate: validateName,
     });
     this.children.inputNameChat = new Input({
       label: 'Имя в чате',
@@ -76,12 +59,7 @@ class ProfileForm extends Form {
     this.children.inputPhone = new Input({
       label: 'Телефон',
       name: 'phone',
-      validate: (value: string) => {
-        const regexp = /^(\+)?[\d]{10,15}$/;
-        return regexp.test(value)
-          ? ''
-          : 'Номер телефона должен содержать от 10 до 15 цифр';
-      },
+      validate: validatePhone,
     });
     this.children.buttonChangeData = new Button({
       label: 'Изменить данные',

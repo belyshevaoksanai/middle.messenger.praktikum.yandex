@@ -1,9 +1,10 @@
-import tmpl from './chat.tmpl'
+import tmpl from './chat.tmpl';
 import classes from './chat.module.scss';
 import Input from '../../../components/Input';
 import IconButton from '../../../components/IconButton';
 import sendIcon from '../../../assets/icons/arrow-right-2.svg';
 import Form from '../../../components/Form';
+import { required } from '../../../utils/validate';
 
 class ChatForm extends Form {
   constructor() {
@@ -30,9 +31,7 @@ class ChatForm extends Form {
     this.children.inputMessage = new Input({
       name: 'message',
       variant: 'filled',
-      validate: (value: string) => (value.length > 0
-        ? ''
-        : 'Пустое сообщение'),
+      validate: required,
     });
     this.children.buttonSend = new IconButton({
       iconUrl: sendIcon,
