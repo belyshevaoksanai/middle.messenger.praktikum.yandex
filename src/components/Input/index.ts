@@ -1,3 +1,4 @@
+import TypeWithClass from '../../models/block-helpers';
 import Block from '../../utils/block';
 import InputError from './Error';
 import InputField from './InputField';
@@ -10,11 +11,12 @@ interface InputProps {
   variant?: 'standard' | 'filled';
   events?: {
     focus?: () => void;
+    blur?: () => void;
   }
   validate?: (value: string) => string;
 }
 
-class Input extends Block {
+class Input extends Block<TypeWithClass<InputProps>> {
   isValid: boolean = true;
 
   constructor(props: InputProps) {

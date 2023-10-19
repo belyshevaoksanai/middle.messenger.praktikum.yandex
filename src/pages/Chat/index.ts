@@ -18,7 +18,7 @@ export class Chat extends Block {
   init(): void {
     this.children.linkProfile = new Link({
       text: 'Профиль',
-      to: '/profile',
+      href: '/profile',
     });
     this.children.inputSearch = new Input({
       variant: 'filled',

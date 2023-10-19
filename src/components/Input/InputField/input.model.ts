@@ -1,9 +1,10 @@
 export interface InputFieldProps {
-  label: string;
+  label?: string;
   name: string;
   placeholder?: string;
   variant?: 'standard' | 'filled';
-  events: {
-    focus: () => void;
+  events?: {
+    focus?: () => void;
+    blur?: () => void;
   };
 }

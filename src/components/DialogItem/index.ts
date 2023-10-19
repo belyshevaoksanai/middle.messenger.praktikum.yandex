@@ -7,7 +7,7 @@ export interface DialogItemProps {
   name: string;
 }
 
-export class DialogItem extends Block {
+export class DialogItem extends Block<DialogItemProps> {
   constructor(props: DialogItemProps) {
     super('div', props);
   }

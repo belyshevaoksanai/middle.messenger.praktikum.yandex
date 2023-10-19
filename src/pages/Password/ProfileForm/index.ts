@@ -75,12 +75,12 @@ class ProfileForm extends Block {
     this.children.buttonChangePassword = new LinkButton({
       label: 'Изменить пароль',
       variant: 'text',
-      to: '/password',
+      href: '/password',
     });
     this.children.buttonExit = new LinkButton({
       label: 'Выйти',
       variant: 'text',
-      to: '/chat',
+      href: '/chat',
     });
   }
 

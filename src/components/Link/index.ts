@@ -1,8 +1,9 @@
+import TypeWithClass from '../../models/block-helpers';
 import Block from '../../utils/block';
 import classes from './link.module.scss';
 
 interface LinkProps {
-  to: string;
+  href: string;
   text: string;
   color?: 'primary' | 'secondary'
 }
@@ -12,14 +13,18 @@ const COLOR = {
   secondary: '#3369F3',
 };
 
-class Link extends Block {
+class Link extends Block<Omit<TypeWithClass<LinkProps>, 'color'> & { color: string }> {
   constructor(props: LinkProps) {
     super('a', {
       ...props,
-      href: props.to,
       class: classes.link,
       color: COLOR[props.color || 'primary'],
     });
+  }
+
+  init() {
+    (this.element as HTMLAnchorElement)!.href = this.props.href;
+    this.element!.style.color = this.props.color;
   }
 
   render() {

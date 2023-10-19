@@ -1,3 +1,4 @@
+import TypeWithClass from '../../models/block-helpers';
 import Block from '../../utils/block';
 import classes from './button.module.scss';
 
@@ -11,12 +12,18 @@ export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
 }
 
-class Button extends Block {
+class Button extends Block<TypeWithClass<ButtonProps>> {
   constructor(props: ButtonProps) {
     super('button', {
       ...props,
       class: classes[props.variant || 'filled'],
     });
+  }
+
+  init() {
+    if (this.props.type) {
+      (this.element as HTMLButtonElement)!.type = this.props.type;
+    }
   }
 
   render() {

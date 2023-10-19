@@ -53,7 +53,7 @@ class PasswordForm extends Block {
     });
     this.children.buttonCancel = new LinkButton({
       label: 'Отмена',
-      to: '/profile',
+      href: '/profile',
     });
   }
 

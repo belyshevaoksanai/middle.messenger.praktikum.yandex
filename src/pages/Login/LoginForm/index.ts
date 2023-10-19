@@ -61,7 +61,7 @@ class LoginForm extends Block {
     this.children.buttonRegistration = new LinkButton({
       label: 'Нет аккаунта?',
       variant: 'text',
-      to: '/registration',
+      href: '/registration',
     });
   }
 

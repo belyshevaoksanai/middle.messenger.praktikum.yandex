@@ -77,7 +77,7 @@ class RegistrationForm extends Block {
     this.children.buttonSignIn = new LinkButton({
       label: 'Войти',
       variant: 'text',
-      to: '/login',
+      href: '/login',
     });
   }
 

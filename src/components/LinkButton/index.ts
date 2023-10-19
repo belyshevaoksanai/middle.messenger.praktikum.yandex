@@ -2,15 +2,12 @@ import Block from '../../utils/block';
 import Button, { ButtonProps } from '../Button';
 
 interface LinkButtonProps extends ButtonProps {
-  to: string;
+  href: string;
 }
 
-class LinkButton extends Block {
+class LinkButton extends Block<LinkButtonProps> {
   constructor(props: LinkButtonProps) {
-    super('a', {
-      ...props,
-      href: props.to,
-    });
+    super('a', props);
   }
 
   init(): void {
@@ -18,6 +15,8 @@ class LinkButton extends Block {
       ...this.props,
       type: 'button',
     });
+
+    (this.element as HTMLAnchorElement)!.href = this.props.href;
   }
 
   render() {

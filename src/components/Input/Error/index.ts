@@ -4,7 +4,7 @@ interface InputErrorProps {
   text: string;
 }
 
-class InputError extends Block {
+class InputError extends Block<InputErrorProps> {
   constructor(props: InputErrorProps) {
     super('span', props);
   }

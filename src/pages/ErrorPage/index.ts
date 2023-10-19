@@ -12,7 +12,7 @@ class ErrorPage extends Block {
 
   init(): void {
     this.children.link = new Link({
-      to: '/chat',
+      href: '/chat',
       text: 'Назад к чатам',
     });
   }

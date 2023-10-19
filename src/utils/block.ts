@@ -144,28 +144,8 @@ class Block<P extends Record<string, any> = any> {
 
     this._element!.append(fragment);
 
-    if (this.props.name && this._meta.tagName === 'input') {
-      (this._element as HTMLInputElement)!.name = this.props.name;
-    }
-
-    if (this.props.placeholder && this._meta.tagName === 'input') {
-      (this._element as HTMLInputElement)!.placeholder = this.props.placeholder;
-    }
-
     if (this.props.class) {
       this._element!.classList.add(this.props.class);
-    }
-
-    if (this.props.color) {
-      this._element!.style.color = this.props.color;
-    }
-
-    if (this.props.type) {
-      (this._element as HTMLButtonElement)!.type = this.props.type;
-    }
-
-    if (this.props.href) {
-      (this._element as HTMLAnchorElement)!.href = this.props.href;
     }
 
     this._addEvents();

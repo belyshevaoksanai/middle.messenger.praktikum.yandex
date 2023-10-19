@@ -1,13 +1,22 @@
+import TypeWithClass from '../../../models/block-helpers';
 import Block from '../../../utils/block';
 import { InputFieldProps } from './input.model';
 import classes from './input.module.scss';
 
-class InputField extends Block {
+class InputField extends Block<TypeWithClass<InputFieldProps>> {
   constructor(props: InputFieldProps) {
     super('input', {
       ...props,
       class: classes[props.variant || 'standard'],
     });
+  }
+
+  init() {
+    if (this.props.placeholder) {
+      (this.element as HTMLInputElement)!.placeholder = this.props.placeholder;
+    }
+
+    (this.element as HTMLInputElement)!.name = this.props.name;
   }
 
   render() {
