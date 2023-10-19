@@ -8,7 +8,7 @@ import CHAT_DATA from './mock';
 import { DialogItem } from '../../components/DialogItem';
 import ChatForm from './ChatForm';
 
-export class Chat extends Block {
+class Chat extends Block {
   constructor() {
     super('div', {
       class: classes.chatPage,
