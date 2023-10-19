@@ -1,7 +1,7 @@
 import TypeWithClass from '../../../models/block-helpers';
 import Block from '../../../utils/block';
-import { InputFieldProps } from './input.model';
-import classes from './input.module.scss';
+import { InputFieldProps } from './InputField.model';
+import classes from './InputField.module.scss';
 
 class InputField extends Block<TypeWithClass<InputFieldProps>> {
   constructor(props: InputFieldProps) {

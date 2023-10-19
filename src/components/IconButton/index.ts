@@ -1,8 +1,8 @@
 import TypeWithClass from '../../models/block-helpers';
 import Block from '../../utils/block';
-import classes from './button.module.scss';
+import classes from './IconButton.module.scss';
 
-export interface ButtonProps {
+export interface IconButtonProps {
   events?: {
     click?: () => void;
   };
@@ -11,8 +11,8 @@ export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
 }
 
-class IconButton extends Block<TypeWithClass<ButtonProps>> {
-  constructor(props: ButtonProps) {
+class IconButton extends Block<TypeWithClass<IconButtonProps>> {
+  constructor(props: IconButtonProps) {
     super('button', {
       ...props,
       class: classes.button,

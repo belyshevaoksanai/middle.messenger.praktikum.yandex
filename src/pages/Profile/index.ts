@@ -1,4 +1,4 @@
-import classes from './profile.module.scss';
+import classes from './profile2.module.scss';
 import Block from '../../utils/block';
 import ProfileForm from './ProfileForm';
 

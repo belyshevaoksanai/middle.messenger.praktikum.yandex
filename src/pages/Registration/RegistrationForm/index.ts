@@ -1,5 +1,5 @@
-import tmpl from './registration';
-import classes from './registration.module.scss';
+import tmpl from './RegistrationForm';
+import classes from './RegistrationForm.module.scss';
 import Title from '../../../components/Title';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';

@@ -1,5 +1,5 @@
-import tmpl from './login.tmpl';
-import classes from './login.module.scss';
+import tmpl from './LoginForm.tmpl';
+import classes from './LoginForm.module.scss';
 import Title from '../../../components/Title';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';

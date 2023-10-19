@@ -1,6 +1,6 @@
 import TypeWithClass from '../../../models/block-helpers';
 import Block from '../../../utils/block';
-import classes from './error.module.scss';
+import classes from './error2.module.scss';
 
 interface InputErrorProps {
   text: string;

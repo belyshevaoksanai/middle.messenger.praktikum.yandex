@@ -1,5 +1,5 @@
-import tmpl from './profile';
-import classes from './profile.module.scss';
+import tmpl from './ProfileForm';
+import classes from './ProfileForm.module.scss';
 import Title from '../../../components/Title';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';

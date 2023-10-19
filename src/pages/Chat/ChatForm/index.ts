@@ -1,5 +1,5 @@
-import tmpl from './chat.tmpl';
-import classes from './chat.module.scss';
+import tmpl from './ChatForm.tmpl';
+import classes from './ChatForm.module.scss';
 import Input from '../../../components/Input';
 import IconButton from '../../../components/IconButton';
 import sendIcon from '../../../assets/icons/arrow-right-2.svg';

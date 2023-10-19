@@ -1,5 +1,5 @@
-import tmpl from './errorPage.tmpl';
-import classes from './errorPage.module.scss';
+import tmpl from './errorPage2.tmpl';
+import classes from './errorPage2.module.scss';
 import Link from '../../components/Link';
 import Block from '../../utils/block';
 

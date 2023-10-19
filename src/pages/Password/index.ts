@@ -1,4 +1,4 @@
-import classes from './password.module.scss';
+import classes from './password2.module.scss';
 import Block from '../../utils/block';
 import PasswordForm from './PasswordForm';
 

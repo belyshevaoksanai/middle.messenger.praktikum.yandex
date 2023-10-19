@@ -1,5 +1,5 @@
 import Block from '../../utils/block';
-import classes from './login.module.scss';
+import classes from './login2.module.scss';
 import LoginForm from './LoginForm';
 
 class Login extends Block {

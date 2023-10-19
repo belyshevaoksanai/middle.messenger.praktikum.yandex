@@ -1,6 +1,6 @@
 import Block from '../../utils/block';
-import tmpl from './not-found.tmpl';
-import classes from './not-found.module.scss';
+import tmpl from './NotFound.tmpl';
+import classes from './NotFound.module.scss';
 import Link from '../../components/Link';
 
 class NotFound extends Block {

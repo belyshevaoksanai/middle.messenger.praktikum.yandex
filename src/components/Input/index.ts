@@ -2,8 +2,8 @@ import TypeWithClass from '../../models/block-helpers';
 import Block from '../../utils/block';
 import InputError from './Error';
 import InputField from './InputField';
-import classes from './input.module.scss';
-import tmpl from './input.tmpl';
+import classes from './input2.module.scss';
+import tmpl from './input2.tmpl';
 
 interface InputProps {
   label?: string;

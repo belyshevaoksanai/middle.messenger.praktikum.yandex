@@ -1,5 +1,5 @@
 import Block from '../../utils/block';
-import classes from './registration.module.scss';
+import classes from './Registration.module.scss';
 import RegistrationForm from './RegistrationForm';
 
 class Registration extends Block {

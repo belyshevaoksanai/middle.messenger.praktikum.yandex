@@ -1,5 +1,5 @@
-import tmpl from './chat.tmpl';
-import classes from './chat.module.scss';
+import tmpl from './chat2.tmpl';
+import classes from './chat2.module.scss';
 import arrowUrl from '../../assets/icons/arrow-right.svg';
 import Block from '../../utils/block';
 import Link from '../../components/Link';

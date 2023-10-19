@@ -1,5 +1,5 @@
-import tmpl from './password';
-import classes from './password.module.scss';
+import tmpl from './PasswordForm';
+import classes from './PasswordForm.module.scss';
 import Title from '../../../components/Title';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
