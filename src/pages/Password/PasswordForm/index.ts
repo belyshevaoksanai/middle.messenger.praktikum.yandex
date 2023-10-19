@@ -28,10 +28,18 @@ class PasswordForm extends Block {
   }
 
   markAllAsTouched(): void {
+    const inputNewPassword = ((this.children.inputNewPassword as Block).children.input as Block).element;
+    inputNewPassword!.dispatchEvent(new Event('blur'));
+    const inputOldPassword = ((this.children.inputOldPassword as Block).children.input as Block).element;
+    inputOldPassword!.dispatchEvent(new Event('blur'));
+    const inputConfirmPassword = ((this.children.inputConfirmPassword as Block).children.input as Block).element;
+    inputConfirmPassword!.dispatchEvent(new Event('blur'));
   }
 
   check(): boolean {
-    return true;
+    return (this.children.inputOldPassword as any).isValid
+    && (this.children.inputOldPassword as any).isValid
+    && (this.children.inputConfirmPassword as any).isValid;
   }
 
   init(): void {
@@ -39,14 +47,26 @@ class PasswordForm extends Block {
     this.children.inputOldPassword = new Input({
       label: 'Старый пароль',
       name: 'oldPassword',
+      validate: (value: string) => (value.length > 0
+        ? ''
+        : 'Обязательно для заполнения'),
     });
     this.children.inputNewPassword = new Input({
       label: 'Новый пароль',
       name: 'newPassword',
+      validate: (value: string) => {
+        const regexp = /^.*(([A-Z].*[\d])|([\d].*[A-Z])).*$/;
+        return regexp.test(value)
+          ? ''
+          : 'Длина пароля от 8 до 40 символов. Обязательно должен сдержать заглавную букву и цифру.';
+      },
     });
     this.children.inputConfirmPassword = new Input({
       label: 'Повторите новый пароль',
       name: 'confirmPassword',
+      validate: (value: string) => (value.length > 0
+        ? ''
+        : 'Обязательно для заполнения'),
     });
     this.children.buttonSave = new Button({
       label: 'Сохранить',

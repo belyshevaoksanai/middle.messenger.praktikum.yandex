@@ -28,12 +28,24 @@ class ProfileForm extends Block {
   }
 
   markAllAsTouched(): void {
-    const input = ((this.children.inputLogin as Block).children.input as Block).element;
-    input!.dispatchEvent(new Event('blur'));
+    const inputLogin = ((this.children.inputLogin as Block).children.input as Block).element;
+    inputLogin!.dispatchEvent(new Event('blur'));
+    const inputPhone = ((this.children.inputPhone as Block).children.input as Block).element;
+    inputPhone!.dispatchEvent(new Event('blur'));
+    const inputName = ((this.children.inputName as Block).children.input as Block).element;
+    inputName!.dispatchEvent(new Event('blur'));
+    const inputEmail = ((this.children.inputEmail as Block).children.input as Block).element;
+    inputEmail!.dispatchEvent(new Event('blur'));
+    const inputSecondName = ((this.children.inputSecondName as Block).children.input as Block).element;
+    inputSecondName!.dispatchEvent(new Event('blur'));
   }
 
   check(): boolean {
-    return (this.children.inputLogin as any).isValid;
+    return (this.children.inputLogin as any).isValid
+      && (this.children.inputPhone as any).isValid
+      && (this.children.inputName as any).isValid
+      && (this.children.inputEmail as any).isValid
+      && (this.children.inputSecondName as any).isValid;
   }
 
   init(): void {
@@ -41,6 +53,12 @@ class ProfileForm extends Block {
     this.children.inputEmail = new Input({
       label: 'Почта',
       name: 'email',
+      validate: (value: string) => {
+        const regexp = /^[A-Za-z-_\d]+@[A-Za-z-_\d]+\.[A-Za-z-_\d]+$/;
+        return regexp.test(value)
+          ? ''
+          : 'Некорректный email';
+      },
     });
     this.children.inputLogin = new Input({
       label: 'Логин',
@@ -55,10 +73,22 @@ class ProfileForm extends Block {
     this.children.inputName = new Input({
       label: 'Имя',
       name: 'first_name',
+      validate: (value: string) => {
+        const regexp = /^[A-ZА-Я][a-zA-Zа-я-А-Я-]*$/;
+        return regexp.test(value)
+          ? ''
+          : 'Допустимые символы: латиница, кириллица, дефис. Первая буква должна быть заглавной.';
+      },
     });
     this.children.inputSecondName = new Input({
       label: 'Фамилия',
       name: 'second_name',
+      validate: (value: string) => {
+        const regexp = /^[A-ZА-Я][a-zA-Zа-я-А-Я-]*$/;
+        return regexp.test(value)
+          ? ''
+          : 'Допустимые символы: латиница, кириллица, дефис. Первая буква должна быть заглавной.';
+      },
     });
     this.children.inputNameChat = new Input({
       label: 'Имя в чате',
@@ -67,6 +97,12 @@ class ProfileForm extends Block {
     this.children.inputPhone = new Input({
       label: 'Телефон',
       name: 'phone',
+      validate: (value: string) => {
+        const regexp = /^(\+)?[\d]{10,15}$/;
+        return regexp.test(value)
+          ? ''
+          : 'Номер телефона должен содержать от 10 до 15 цифр';
+      },
     });
     this.children.buttonChangeData = new Button({
       label: 'Изменить данные',

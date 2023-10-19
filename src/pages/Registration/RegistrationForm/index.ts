@@ -28,15 +28,27 @@ class RegistrationForm extends Block {
   }
 
   markAllAsTouched(): void {
-    const input = ((this.children.inputLogin as Block).children.input as Block).element;
-    input!.dispatchEvent(new Event('blur'));
-    const input2 = ((this.children.inputPassword as Block).children.input as Block).element;
-    input2!.dispatchEvent(new Event('blur'));
+    const inputLogin = ((this.children.inputLogin as Block).children.input as Block).element;
+    inputLogin!.dispatchEvent(new Event('blur'));
+    const inputPassword = ((this.children.inputPassword as Block).children.input as Block).element;
+    inputPassword!.dispatchEvent(new Event('blur'));
+    const inputName = ((this.children.inputName as Block).children.input as Block).element;
+    inputName!.dispatchEvent(new Event('blur'));
+    const inputSecondName = ((this.children.inputSecondName as Block).children.input as Block).element;
+    inputSecondName!.dispatchEvent(new Event('blur'));
+    const inputPhone = ((this.children.inputPhone as Block).children.input as Block).element;
+    inputPhone!.dispatchEvent(new Event('blur'));
+    const inputConfirmPassword = ((this.children.inputConfirmPassword as Block).children.input as Block).element;
+    inputConfirmPassword!.dispatchEvent(new Event('blur'));
   }
 
   check(): boolean {
     return (this.children.inputLogin as any).isValid
-      && (this.children.inputPassword as any).isValid;
+      && (this.children.inputPassword as any).isValid
+      && (this.children.inputSecondName as any).isValid
+      && (this.children.inputPhone as any).isValid
+      && (this.children.inputConfirmPassword as any).isValid
+      && (this.children.inputName as any).isValid;
   }
 
   init(): void {
@@ -54,22 +66,49 @@ class RegistrationForm extends Block {
     this.children.inputName = new Input({
       label: 'Имя',
       name: 'first_name',
+      validate: (value: string) => {
+        const regexp = /^[A-ZА-Я][a-zA-Zа-я-А-Я-]*$/;
+        return regexp.test(value)
+          ? ''
+          : 'Допустимые символы: латиница, кириллица, дефис. Первая буква должна быть заглавной.';
+      },
     });
     this.children.inputSecondName = new Input({
       label: 'Фамилия',
       name: 'second_name',
+      validate: (value: string) => {
+        const regexp = /^[A-ZА-Я][a-zA-Zа-я-А-Я-]*$/;
+        return regexp.test(value)
+          ? ''
+          : 'Допустимые символы: латиница, кириллица, дефис. Первая буква должна быть заглавной.';
+      },
     });
     this.children.inputPhone = new Input({
       label: 'Телефон',
       name: 'phone',
+      validate: (value: string) => {
+        const regexp = /^(\+)?[\d]{10,15}$/;
+        return regexp.test(value)
+          ? ''
+          : 'Номер телефона должен содержать от 10 до 15 цифр';
+      },
     });
     this.children.inputPassword = new Input({
       label: 'Пароль',
       name: 'password',
+      validate: (value: string) => {
+        const regexp = /^.*(([A-Z].*[\d])|([\d].*[A-Z])).*$/;
+        return regexp.test(value)
+          ? ''
+          : 'Длина пароля от 8 до 40 символов. Обязательно должен сдержать заглавную букву и цифру.';
+      },
     });
     this.children.inputConfirmPassword = new Input({
       label: 'Пароль (ещё раз)',
       name: 'confirmPassword',
+      validate: (value: string) => (value.length > 0
+        ? ''
+        : 'Обязательное для заполнения'),
     });
     this.children.buttonRegistration = new Button({
       label: 'Зарегистрироваться',

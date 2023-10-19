@@ -44,16 +44,16 @@ class LoginForm extends Block {
     this.children.inputLogin = new Input({
       label: 'Логин',
       name: 'login',
-      validate: (value: string) => {
-        const regexp = /^[\da-zA-Z_-]*[a-zA-Z][\da-zA-Z_-]*$/;
-        return regexp.test(value) && value.length >= 3 && value.length <= 20
-          ? ''
-          : 'Длина логина от 3 до 20 символов. Допустимые символы: латиница, цифры, дефис и нижнее подчёркивание. Должен содержать хотя бы одну букву';
-      },
+      validate: (value: string) => (value.length > 0
+        ? ''
+        : 'Обязательное для заполнения'),
     });
     this.children.inputPassword = new Input({
       label: 'Пароль',
       name: 'password',
+      validate: (value: string) => (value.length > 0
+        ? ''
+        : 'Обязательное для заполнения'),
     });
     this.children.buttonAuth = new Button({
       label: 'Авторизоваться',
