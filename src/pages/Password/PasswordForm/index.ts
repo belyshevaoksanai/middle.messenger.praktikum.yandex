@@ -1,13 +1,13 @@
 import tmpl from './password';
-import Block from '../../../utils/block';
 import classes from './password.module.scss';
 import Title from '../../../components/Title';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import LinkButton from '../../../components/LinkButton';
 import editAvatar from '../../../assets/images/edit-avatar.svg';
+import Form from '../../../components/Form';
 
-class PasswordForm extends Block {
+class PasswordForm extends Form {
   constructor() {
     super('form', {
       events: {
@@ -25,21 +25,6 @@ class PasswordForm extends Block {
         },
       },
     });
-  }
-
-  markAllAsTouched(): void {
-    const inputNewPassword = ((this.children.inputNewPassword as Block).children.input as Block).element;
-    inputNewPassword!.dispatchEvent(new Event('blur'));
-    const inputOldPassword = ((this.children.inputOldPassword as Block).children.input as Block).element;
-    inputOldPassword!.dispatchEvent(new Event('blur'));
-    const inputConfirmPassword = ((this.children.inputConfirmPassword as Block).children.input as Block).element;
-    inputConfirmPassword!.dispatchEvent(new Event('blur'));
-  }
-
-  check(): boolean {
-    return (this.children.inputOldPassword as any).isValid
-    && (this.children.inputOldPassword as any).isValid
-    && (this.children.inputConfirmPassword as any).isValid;
   }
 
   init(): void {

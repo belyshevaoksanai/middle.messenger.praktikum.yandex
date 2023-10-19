@@ -1,12 +1,12 @@
 import tmpl from './registration';
-import Block from '../../../utils/block';
 import classes from './registration.module.scss';
 import Title from '../../../components/Title';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import LinkButton from '../../../components/LinkButton';
+import Form from '../../../components/Form';
 
-class RegistrationForm extends Block {
+class RegistrationForm extends Form {
   constructor() {
     super('form', {
       class: classes.registrationContainer,
@@ -25,30 +25,6 @@ class RegistrationForm extends Block {
         },
       },
     });
-  }
-
-  markAllAsTouched(): void {
-    const inputLogin = ((this.children.inputLogin as Block).children.input as Block).element;
-    inputLogin!.dispatchEvent(new Event('blur'));
-    const inputPassword = ((this.children.inputPassword as Block).children.input as Block).element;
-    inputPassword!.dispatchEvent(new Event('blur'));
-    const inputName = ((this.children.inputName as Block).children.input as Block).element;
-    inputName!.dispatchEvent(new Event('blur'));
-    const inputSecondName = ((this.children.inputSecondName as Block).children.input as Block).element;
-    inputSecondName!.dispatchEvent(new Event('blur'));
-    const inputPhone = ((this.children.inputPhone as Block).children.input as Block).element;
-    inputPhone!.dispatchEvent(new Event('blur'));
-    const inputConfirmPassword = ((this.children.inputConfirmPassword as Block).children.input as Block).element;
-    inputConfirmPassword!.dispatchEvent(new Event('blur'));
-  }
-
-  check(): boolean {
-    return (this.children.inputLogin as any).isValid
-      && (this.children.inputPassword as any).isValid
-      && (this.children.inputSecondName as any).isValid
-      && (this.children.inputPhone as any).isValid
-      && (this.children.inputConfirmPassword as any).isValid
-      && (this.children.inputName as any).isValid;
   }
 
   init(): void {

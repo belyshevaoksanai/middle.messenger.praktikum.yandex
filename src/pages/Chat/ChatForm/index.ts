@@ -1,11 +1,11 @@
-import tmpl from './chat.tmpl';
-import Block from '../../../utils/block';
+import tmpl from './chat.tmpl'
 import classes from './chat.module.scss';
 import Input from '../../../components/Input';
 import IconButton from '../../../components/IconButton';
 import sendIcon from '../../../assets/icons/arrow-right-2.svg';
+import Form from '../../../components/Form';
 
-class ChatForm extends Block {
+class ChatForm extends Form {
   constructor() {
     super('form', {
       class: classes.messageContainer,
@@ -24,15 +24,6 @@ class ChatForm extends Block {
         },
       },
     });
-  }
-
-  markAllAsTouched(): void {
-    const input = ((this.children.inputMessage as Block).children.input as Block).element;
-    input!.dispatchEvent(new Event('blur'));
-  }
-
-  check(): boolean {
-    return (this.children.inputMessage as any).isValid;
   }
 
   init(): void {

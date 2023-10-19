@@ -1,12 +1,12 @@
 import tmpl from './login.tmpl';
-import Block from '../../../utils/block';
 import classes from './login.module.scss';
 import Title from '../../../components/Title';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import LinkButton from '../../../components/LinkButton';
+import Form from '../../../components/Form';
 
-class LoginForm extends Block {
+class LoginForm extends Form {
   constructor() {
     super('form', {
       class: classes.loginContainer,
@@ -25,18 +25,6 @@ class LoginForm extends Block {
         },
       },
     });
-  }
-
-  markAllAsTouched(): void {
-    const input = ((this.children.inputLogin as Block).children.input as Block).element;
-    input!.dispatchEvent(new Event('blur'));
-    const input2 = ((this.children.inputPassword as Block).children.input as Block).element;
-    input2!.dispatchEvent(new Event('blur'));
-  }
-
-  check(): boolean {
-    return (this.children.inputLogin as any).isValid
-      && (this.children.inputPassword as any).isValid;
   }
 
   init(): void {

@@ -1,13 +1,13 @@
 import tmpl from './profile';
-import Block from '../../../utils/block';
 import classes from './profile.module.scss';
 import Title from '../../../components/Title';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import LinkButton from '../../../components/LinkButton';
 import editAvatar from '../../../assets/images/edit-avatar.svg';
+import Form from '../../../components/Form';
 
-class ProfileForm extends Block {
+class ProfileForm extends Form {
   constructor() {
     super('form', {
       events: {
@@ -25,27 +25,6 @@ class ProfileForm extends Block {
         },
       },
     });
-  }
-
-  markAllAsTouched(): void {
-    const inputLogin = ((this.children.inputLogin as Block).children.input as Block).element;
-    inputLogin!.dispatchEvent(new Event('blur'));
-    const inputPhone = ((this.children.inputPhone as Block).children.input as Block).element;
-    inputPhone!.dispatchEvent(new Event('blur'));
-    const inputName = ((this.children.inputName as Block).children.input as Block).element;
-    inputName!.dispatchEvent(new Event('blur'));
-    const inputEmail = ((this.children.inputEmail as Block).children.input as Block).element;
-    inputEmail!.dispatchEvent(new Event('blur'));
-    const inputSecondName = ((this.children.inputSecondName as Block).children.input as Block).element;
-    inputSecondName!.dispatchEvent(new Event('blur'));
-  }
-
-  check(): boolean {
-    return (this.children.inputLogin as any).isValid
-      && (this.children.inputPhone as any).isValid
-      && (this.children.inputName as any).isValid
-      && (this.children.inputEmail as any).isValid
-      && (this.children.inputSecondName as any).isValid;
   }
 
   init(): void {
