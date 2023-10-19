@@ -15,7 +15,7 @@ const tmpl = (classes: Record<string, string>, arrowUrl: string) => `
             <div class="${classes.emptyChat}">
                 <span>Выберите чат чтобы отправить сообщение</span>
             </div>
-            <div>
+            <div class="${classes.messageContainer}">
               {{{form}}}
             </div>
         </div>

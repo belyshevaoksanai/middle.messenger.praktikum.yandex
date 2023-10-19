@@ -8,26 +8,6 @@ import Form from '../../../components/Form';
 import { required } from '../../../utils/validate';
 
 class LoginForm extends Form {
-  constructor() {
-    super('form', {
-      class: classes.loginContainer,
-      events: {
-        submit: (event: any) => {
-          event.preventDefault();
-
-          this.markAllAsTouched();
-
-          if (this.check()) {
-            const formData = new FormData(this.element as HTMLFormElement);
-            const values = Object.fromEntries(formData);
-            console.log('form value:');
-            console.log(values);
-          }
-        },
-      },
-    });
-  }
-
   init(): void {
     this.children.title = new Title({ text: 'Вход' });
     this.children.inputLogin = new Input({
@@ -48,6 +28,11 @@ class LoginForm extends Form {
       variant: 'text',
       href: '/registration',
     });
+  }
+
+  submit(values: any): void {
+    console.log('form value:');
+    console.log(values);
   }
 
   protected render(): DocumentFragment {

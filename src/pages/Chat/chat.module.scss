@@ -37,3 +37,9 @@
     color: $label-color;
     flex-grow: 1;
 }
+
+.messageContainer {
+    border-top: 1px solid $border-color;
+    padding: 12px 0px;
+    margin: 0px 12px;
+}

@@ -10,26 +10,6 @@ import {
 } from '../../../utils/validate';
 
 class RegistrationForm extends Form {
-  constructor() {
-    super('form', {
-      class: classes.registrationContainer,
-      events: {
-        submit: (event: any) => {
-          event.preventDefault();
-
-          this.markAllAsTouched();
-
-          if (this.check()) {
-            const formData = new FormData(this.element as HTMLFormElement);
-            const values = Object.fromEntries(formData);
-            console.log('form value:');
-            console.log(values);
-          }
-        },
-      },
-    });
-  }
-
   init(): void {
     this.children.title = new Title({ text: 'Регистрация' });
     this.children.inputLogin = new Input({
@@ -70,6 +50,11 @@ class RegistrationForm extends Form {
       variant: 'text',
       href: '/login',
     });
+  }
+
+  submit(values: any): void {
+    console.log('form value:');
+    console.log(values);
   }
 
   protected render(): DocumentFragment {

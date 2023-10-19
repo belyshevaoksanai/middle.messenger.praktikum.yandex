@@ -14,7 +14,7 @@ class Login extends Block {
   }
 
   protected render(): DocumentFragment {
-    return this.compile('{{{form}}}', this.props);
+    return this.compile(`<div class="${classes.loginContainer}">{{{form}}}</div>`, this.props);
   }
 }
 

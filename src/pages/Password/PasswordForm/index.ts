@@ -9,25 +9,6 @@ import Form from '../../../components/Form';
 import { required, validatePassword } from '../../../utils/validate';
 
 class PasswordForm extends Form {
-  constructor() {
-    super('form', {
-      events: {
-        submit: (event: any) => {
-          event.preventDefault();
-
-          this.markAllAsTouched();
-
-          if (this.check()) {
-            const formData = new FormData(this.element as HTMLFormElement);
-            const values = Object.fromEntries(formData);
-            console.log('form value:');
-            console.log(values);
-          }
-        },
-      },
-    });
-  }
-
   init(): void {
     this.children.title = new Title({ text: 'Иван' });
     this.children.inputOldPassword = new Input({
@@ -52,6 +33,11 @@ class PasswordForm extends Form {
       label: 'Отмена',
       href: '/profile',
     });
+  }
+
+  submit(values: any): void {
+    console.log('form value:');
+    console.log(values);
   }
 
   protected render(): DocumentFragment {

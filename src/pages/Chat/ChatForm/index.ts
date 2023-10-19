@@ -7,26 +7,6 @@ import Form from '../../../components/Form';
 import { required } from '../../../utils/validate';
 
 class ChatForm extends Form {
-  constructor() {
-    super('form', {
-      class: classes.messageContainer,
-      events: {
-        submit: (event: any) => {
-          event.preventDefault();
-
-          this.markAllAsTouched();
-
-          if (this.check()) {
-            const formData = new FormData(this.element as HTMLFormElement);
-            const values = Object.fromEntries(formData);
-            console.log('form value:');
-            console.log(values);
-          }
-        },
-      },
-    });
-  }
-
   init(): void {
     this.children.inputMessage = new Input({
       name: 'message',
@@ -37,6 +17,11 @@ class ChatForm extends Form {
       iconUrl: sendIcon,
       type: 'submit',
     });
+  }
+
+  submit(values: any): void {
+    console.log('form value:');
+    console.log(values);
   }
 
   protected render(): DocumentFragment {

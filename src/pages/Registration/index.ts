@@ -14,7 +14,7 @@ class Registration extends Block {
   }
 
   protected render(): DocumentFragment {
-    return this.compile('{{{form}}}', this.props);
+    return this.compile(`<div class="${classes.registrationContainer}">{{{form}}}</div>`, this.props);
   }
 }
 

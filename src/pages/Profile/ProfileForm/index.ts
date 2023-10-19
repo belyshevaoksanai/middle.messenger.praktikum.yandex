@@ -11,25 +11,6 @@ import {
 } from '../../../utils/validate';
 
 class ProfileForm extends Form {
-  constructor() {
-    super('form', {
-      events: {
-        submit: (event: any) => {
-          event.preventDefault();
-
-          this.markAllAsTouched();
-
-          if (this.check()) {
-            const formData = new FormData(this.element as HTMLFormElement);
-            const values = Object.fromEntries(formData);
-            console.log('form value:');
-            console.log(values);
-          }
-        },
-      },
-    });
-  }
-
   init(): void {
     this.children.title = new Title({ text: 'Иван' });
     this.children.inputEmail = new Input({
@@ -75,6 +56,11 @@ class ProfileForm extends Form {
       variant: 'text',
       href: '/chat',
     });
+  }
+
+  submit(values: any): void {
+    console.log('form value:');
+    console.log(values);
   }
 
   protected render(): DocumentFragment {
