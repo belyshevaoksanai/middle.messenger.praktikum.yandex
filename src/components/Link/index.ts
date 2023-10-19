@@ -1,6 +1,6 @@
 import TypeWithClass from '../../models/block-helpers';
 import Block from '../../utils/block';
-import classes from './link2.module.scss';
+import classes from './Link.module.scss';
 
 interface LinkProps {
   href: string;

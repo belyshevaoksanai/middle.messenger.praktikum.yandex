@@ -1,6 +1,6 @@
 import TypeWithClass from '../../models/block-helpers';
 import Block from '../../utils/block';
-import classes from './title2.module.scss';
+import classes from './Title.module.scss';
 
 interface TitleProps {
   text: string;

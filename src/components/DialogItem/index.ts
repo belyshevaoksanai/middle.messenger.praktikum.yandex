@@ -1,7 +1,7 @@
 import Block from '../../utils/block';
-import tmpl from './dialogItem2.tmpl';
+import tmpl from './DialogItem.tmpl';
 import emtyAvatarUrl from '../../assets/images/empty-avatar.svg';
-import classes from './dialogItem2.module.scss';
+import classes from './DialogItem.module.scss';
 
 export interface DialogItemProps {
   name: string;

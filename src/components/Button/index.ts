@@ -1,6 +1,6 @@
 import TypeWithClass from '../../models/block-helpers';
 import Block from '../../utils/block';
-import classes from './button2.module.scss';
+import classes from './Button.module.scss';
 
 export interface ButtonProps {
   events?: {
