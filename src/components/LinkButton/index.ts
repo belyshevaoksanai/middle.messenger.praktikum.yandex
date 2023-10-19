@@ -1,14 +1,27 @@
-import Handlebars from "handlebars";
-import { tmpl } from "./linkButton.tmpl";
-import { Button, ButtonProps } from "../Button";
+import Block from '../../utils/block';
+import Button, { ButtonProps } from '../Button';
 
 interface LinkButtonProps extends ButtonProps {
-    to: string;
+  href: string;
 }
 
-export const LinkButton = ({to, ...buttonProps}: LinkButtonProps) => {
-    return Handlebars.compile(tmpl)({
-        to,
-        button: Button(buttonProps),
+class LinkButton extends Block<LinkButtonProps> {
+  constructor(props: LinkButtonProps) {
+    super('a', props);
+  }
+
+  init(): void {
+    this.children.button = new Button({
+      ...this.props,
+      type: 'button',
     });
-};
+
+    (this.element as HTMLAnchorElement)!.href = this.props.href;
+  }
+
+  render() {
+    return this.compile('{{{button}}}', this.props);
+  }
+}
+
+export default LinkButton;

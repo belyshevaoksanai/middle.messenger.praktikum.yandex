@@ -1,18 +1,36 @@
-import Handlebars from "handlebars";
-import { tmpl } from "./chat.tmpl";
-import classes from './chat.module.scss';
-import { Link } from "../../components/Link";
-import arrowUrl from '../../assets/icons/arrow-right.svg'
-import { Input } from "../../components/Input";
-import { CHAT_DATA } from './mock';
-import { DialogItem } from "../../components/DialogItem";
+import tmpl from './Chat.tmpl';
+import classes from './Chat.module.scss';
+import arrowUrl from '../../assets/icons/arrow-right.svg';
+import Block from '../../utils/block';
+import Link from '../../components/Link';
+import Input from '../../components/Input';
+import CHAT_DATA from './mock';
+import { DialogItem } from '../../components/DialogItem';
+import ChatForm from './ChatForm';
 
-export const Chat = () => {
-    return Handlebars.compile(tmpl)({
-        classes,
-        linkProfile: Link({text: 'Профиль', to: '/profile'}),
-        arrowUrl,
-        inputSearch: Input({variant: 'filled', placeholder: 'Поиск', name: 'message'}),
-        chatDialogs: CHAT_DATA.map((chat) => DialogItem(chat)).join(''),
+class Chat extends Block {
+  constructor() {
+    super('div', {
+      class: classes.chatPage,
     });
-};
+  }
+
+  init(): void {
+    this.children.linkProfile = new Link({
+      text: 'Профиль',
+      href: '/profile',
+    });
+    this.children.inputSearch = new Input({
+      variant: 'filled',
+      name: 'search',
+    });
+    this.children.chatDialogs = CHAT_DATA.map((chat) => new DialogItem(chat));
+    this.children.form = new ChatForm();
+  }
+
+  protected render(): DocumentFragment {
+    return this.compile(tmpl(classes, arrowUrl), this.props);
+  }
+}
+
+export default Chat;

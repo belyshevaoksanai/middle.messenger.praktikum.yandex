@@ -1,0 +1,45 @@
+.dialogContainer {
+    width: 310px;
+    border-right: 1px solid $border-color;
+    padding: 10px;
+    background-color: $background-dark;
+}
+
+.chatContainer {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.chatPage {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.linkContainer {
+    display: flex;
+    justify-content: end;
+    padding: 21px 0;
+    gap: 8px;
+    align-items: baseline;
+}
+
+.dialogList {
+    margin-top: 14px;
+}
+
+.emptyChat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: $label-color;
+    flex-grow: 1;
+}
+
+.messageContainer {
+    border-top: 1px solid $border-color;
+    padding: 12px 0;
+    margin: 0 12px;
+}

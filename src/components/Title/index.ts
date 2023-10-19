@@ -1,14 +1,22 @@
-import Handlebars from "handlebars";
-import { tmpl } from "./title.tmpl";
-import classes from './title.module.scss';
+import TypeWithClass from '../../models/block-helpers';
+import Block from '../../utils/block';
+import classes from './Title.module.scss';
 
 interface TitleProps {
-    text: string;
+  text: string;
 }
 
-export const Title = (props: TitleProps) => {
-    return Handlebars.compile(tmpl)({
-        ...props,
-        classes,
+class Title extends Block<TypeWithClass<TitleProps>> {
+  constructor(props: TitleProps) {
+    super('h1', {
+      ...props,
+      class: classes.title,
     });
-};
+  }
+
+  render() {
+    return this.compile('{{text}}', this.props);
+  }
+}
+
+export default Title;
