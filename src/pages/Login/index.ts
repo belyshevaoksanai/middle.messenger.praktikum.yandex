@@ -1,17 +1,21 @@
-import Handlebars from "handlebars";
-import { tmpl } from "./login.tmpl";
-import classes from './login.module.scss';
-import { Title } from "../../components/Title";
-import { Input } from "../../components/Input";
-import { LinkButton } from "../../components/LinkButton";
+import Block from '../../utils/block';
+import classes from './Login.module.scss';
+import LoginForm from './LoginForm';
 
-export const Login = () => {
-    return Handlebars.compile(tmpl)({
-        classes,
-        title: Title({text: 'Вход'}),
-        inputLogin: Input({label: 'Логин', name: 'login'}),
-        inputPassword: Input({label: 'Пароль', name: 'password'}),
-        buttonAuth: LinkButton({label: 'Авторизоваться', to: '/chat'}),
-        buttonRegistration: LinkButton({label: 'Нет аккаунта?', variant: 'text', to: '/registration'})
+class Login extends Block {
+  constructor() {
+    super('div', {
+      class: classes.login,
     });
-};
+  }
+
+  init(): void {
+    this.children.form = new LoginForm();
+  }
+
+  protected render(): DocumentFragment {
+    return this.compile(`<div class="${classes.loginContainer}">{{{form}}}</div>`, this.props);
+  }
+}
+
+export default Login;

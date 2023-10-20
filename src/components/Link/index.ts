@@ -1,22 +1,35 @@
-import Handlebars from "handlebars";
-import { tmpl } from "./link.tmpl";
-import classes from './link.module.scss';
+import TypeWithClass from '../../models/block-helpers';
+import Block from '../../utils/block';
+import classes from './Link.module.scss';
 
 interface LinkProps {
-    to: string;
-    text: string;
-    color?: 'primary' | 'secondary'
+  href: string;
+  text: string;
+  color?: 'primary' | 'secondary'
 }
 
 const COLOR = {
-    primary: '#999999',
-    secondary: '#3369F3',
+  primary: '#999999',
+  secondary: '#3369F3',
+};
+
+class Link extends Block<Omit<TypeWithClass<LinkProps>, 'color'> & { color: string }> {
+  constructor(props: LinkProps) {
+    super('a', {
+      ...props,
+      class: classes.link,
+      color: COLOR[props.color || 'primary'],
+    });
+  }
+
+  init() {
+    (this.element as HTMLAnchorElement)!.href = this.props.href;
+    this.element!.style.color = this.props.color;
+  }
+
+  render() {
+    return this.compile('{{text}}', this.props);
+  }
 }
 
-export const Link = (props: LinkProps) => {
-    return Handlebars.compile(tmpl)({
-        ...props,
-        classes,
-        color: COLOR[props.color || 'primary'],
-    });
-};
+export default Link;

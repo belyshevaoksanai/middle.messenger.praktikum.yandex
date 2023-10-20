@@ -1,0 +1,11 @@
+.registration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.registrationContainer {
+    box-shadow: 0 0 6px 0 $shadow-color;
+    padding: 50px 30px;
+}
