@@ -5,7 +5,7 @@ import NotFound from './pages/NotFound';
 import Password from './pages/Password';
 import Profile from './pages/Profile';
 import Registration from './pages/Registration';
-import './reset.css';
+import './reset.scss';
 
 const ROUTES: Record<string, any> = {
   '/': Login,
