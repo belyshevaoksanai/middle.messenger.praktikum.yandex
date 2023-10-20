@@ -14,6 +14,11 @@ type Options<Data> = {
 
 type OptionsWithoutMethod<Data> = Omit<Options<Data>, 'method'>;
 
+type HTTPMethod<Data> = <TResponse>(
+  url: string,
+  options?: OptionsWithoutMethod<Data>,
+) => Promise<TResponse>;
+
 type DataType = Record<string, any>;
 
 function queryStringify(data?: DataType) {
@@ -57,35 +62,27 @@ class HTTPTransport<Data extends DataType> {
     });
   }
 
-  get<TResponse>(url: string, options: OptionsWithoutMethod<Data> = {}): Promise<TResponse> {
-    return this.request(
-      `${url}${queryStringify(options.data)}`,
-      { ...options, method: METHOD.GET },
-      options.timeout,
-    );
-  }
+  get: HTTPMethod<Data> = (url, options = {}) => this.request(
+    `${url}${queryStringify(options.data)}`,
+    { ...options, method: METHOD.GET },
+    options.timeout,
+  );
 
-  post<TResponse>(url: string, options: OptionsWithoutMethod<Data> = {}): Promise<TResponse> {
-    return this.request(
-      url,
-      { ...options, method: METHOD.POST },
-      options.timeout,
-    );
-  }
+  post: HTTPMethod<Data> = (url, options = {}) => this.request(
+    url,
+    { ...options, method: METHOD.POST },
+    options.timeout,
+  );
 
-  put<TResponse>(url: string, options: OptionsWithoutMethod<Data> = {}): Promise<TResponse> {
-    return this.request(
-      url,
-      { ...options, method: METHOD.PUT },
-      options.timeout,
-    );
-  }
+  put: HTTPMethod<Data> = (url, options = {}) => this.request(
+    url,
+    { ...options, method: METHOD.PUT },
+    options.timeout,
+  );
 
-  delete<TResponse>(url: string, options: OptionsWithoutMethod<Data> = {}): Promise<TResponse> {
-    return this.request(
-      url,
-      { ...options, method: METHOD.DELETE },
-      options.timeout,
-    );
-  }
+  delete: HTTPMethod<Data> = (url, options = {}) => this.request(
+    url,
+    { ...options, method: METHOD.DELETE },
+    options.timeout,
+  );
 }

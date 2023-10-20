@@ -23,6 +23,8 @@ class Block<P extends Record<string, any> = any> {
 
   private _meta: { tagName: string; props: P; };
 
+  private _eventListenerController: null | AbortController = null;
+
   constructor(tagName: string, propsWithChildren: P) {
     const eventBus = new EventBus();
 
@@ -61,11 +63,20 @@ class Block<P extends Record<string, any> = any> {
     return { props: props as P, children };
   }
 
+  _removeEvents() {
+    if (this._eventListenerController) {
+      this._eventListenerController.abort();
+    }
+  }
+
   _addEvents() {
     const { events = {} } = this.props as P & { events: Record<string, () => void> };
+    this._eventListenerController = new AbortController();
 
     Object.keys(events).forEach((eventName) => {
-      this._element?.addEventListener(eventName, events[eventName]);
+      this._element?.addEventListener(eventName, events[eventName], {
+        signal: this._eventListenerController!.signal,
+      });
     });
   }
 
@@ -138,6 +149,7 @@ class Block<P extends Record<string, any> = any> {
   private _render() {
     const fragment = this.render();
 
+    this._removeEvents();
     this._element!.innerHTML = '';
 
     this._element!.append(fragment);
