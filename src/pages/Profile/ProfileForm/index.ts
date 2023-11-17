@@ -10,11 +10,12 @@ import {
 import ProfileFormModel from './ProfileForm.model';
 import AuthController from '../../../controllers/authController';
 import router from '../../../core/Router/router';
-import { Routes } from '../../..';
-import store, { IState, StoreEvents, withStore } from '../../../core/Store';
+import store, { IState, StoreEvents } from '../../../core/Store';
 import Block from '../../../core/Block/block';
 import UserController from '../../../controllers/userController';
 import AvatarInput from '../../../components/AvatarInput';
+import Routes from '../../../enum/routes';
+import withStore from '../../../core/Store/withStore';
 
 class ProfileForm extends Form {
   init(): void {

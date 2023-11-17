@@ -1,6 +1,5 @@
 import { IUser } from '../../api/authApi';
 import set from '../../utils/set';
-import Block from '../Block/block';
 import EventBus from '../EventBus/eventBus';
 
 export interface IState {
@@ -18,10 +17,6 @@ export enum StoreEvents {
 class Store extends EventBus {
   private state: IState = {};
 
-  constructor() {
-    super();
-  }
-
   getState(): IState {
     return this.state;
   }
@@ -35,17 +30,3 @@ class Store extends EventBus {
 
 const store = new Store();
 export default store;
-
-export const withStore = (
-  mapStateToProps: (data: IState) => any,
-) => (Component: typeof Block) => class extends Component {
-  constructor(propsWithChildren: any) {
-    super({ ...propsWithChildren, ...mapStateToProps(store.getState()) });
-
-    store.on(StoreEvents.Update, () => {
-      const newProps = mapStateToProps(store.getState());
-
-      this.setProps(newProps);
-    });
-  }
-};

@@ -11,11 +11,9 @@ class Router {
   private currentRoute: Route | null = null;
 
   constructor(private readonly rootQuery: string) {
-    if (Router.__instance) {
-      return Router.__instance;
+    if (!Router.__instance) {
+      Router.__instance = this;
     }
-
-    Router.__instance = this;
   }
 
   public use(pathname: string, block: typeof Block) {

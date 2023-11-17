@@ -9,11 +9,12 @@ import ChatForm from './ChatForm';
 import ChatController from '../../controllers/chatController';
 import Button from '../../components/Button';
 import CreateDailog from './CreateDailog';
-import store, { IState, StoreEvents, withStore } from '../../core/Store';
+import store, { IState, StoreEvents } from '../../core/Store';
 import WSTransport, { WSTransportEvents } from '../../core/WsTransport/wsTransport';
 import AddUserDailog from './AddUserDialog';
 import Message from './Message';
 import RemoveUserDailog from './RemoveUserDialog';
+import withStore from '../../core/Store/withStore';
 
 class Chat extends Block {
   ws: WSTransport | undefined;

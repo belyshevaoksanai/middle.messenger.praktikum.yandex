@@ -7,12 +7,13 @@ import Form from '../../../components/Form';
 import { required, validatePassword } from '../../../utils/validate';
 import PasswordFormModel from './PasswordForm.model';
 import router from '../../../core/Router/router';
-import { Routes } from '../../..';
 import UserController from '../../../controllers/userController';
 import AvatarInput from '../../../components/AvatarInput';
 import AuthController from '../../../controllers/authController';
 import Block from '../../../core/Block/block';
-import store, { IState, StoreEvents, withStore } from '../../../core/Store';
+import store, { IState, StoreEvents } from '../../../core/Store';
+import Routes from '../../../enum/routes';
+import withStore from '../../../core/Store/withStore';
 
 class PasswordForm extends Form {
   init(): void {

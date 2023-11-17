@@ -9,10 +9,6 @@ export interface DialogItemProps {
 }
 
 export class DialogItem extends Block<DialogItemProps> {
-  constructor(props: DialogItemProps) {
-    super(props);
-  }
-
   protected render(): DocumentFragment {
     return this.compile(tmpl(classes, emtyAvatarUrl), this.props);
   }

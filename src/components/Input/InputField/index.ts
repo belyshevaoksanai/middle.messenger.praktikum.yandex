@@ -12,11 +12,17 @@ class InputField extends Block<TypeWithClass<InputFieldProps>> {
     });
   }
 
-  protected componentDidUpdate(oldProps: TypeWithClass<InputFieldProps>, newProps: TypeWithClass<InputFieldProps>): boolean {
+  protected componentDidUpdate(
+    oldProps: TypeWithClass<InputFieldProps>,
+    newProps: TypeWithClass<InputFieldProps>,
+  ): boolean {
     if (!isEqual(oldProps, newProps)) {
       return true;
     }
-    if (newProps.value !== undefined && (this.element as HTMLInputElement).value !== newProps.value) {
+    if (
+      newProps.value !== undefined
+      && (this.element as HTMLInputElement).value !== newProps.value
+    ) {
       return true;
     }
     return false;

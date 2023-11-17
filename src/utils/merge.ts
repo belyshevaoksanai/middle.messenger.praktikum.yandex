@@ -1,11 +1,7 @@
 import Indexed from '../models/indexed';
 
 function merge(lhs: Indexed, rhs: Indexed): Indexed {
-  for (const p in rhs) {
-    if (!rhs.hasOwnProperty(p)) {
-      continue;
-    }
-
+  Object.keys(rhs).forEach((p) => {
     try {
       if ((rhs[p] as Indexed<any>).constructor === Object) {
         rhs[p] = merge(lhs[p] as Indexed, rhs[p] as Indexed);
@@ -15,7 +11,7 @@ function merge(lhs: Indexed, rhs: Indexed): Indexed {
     } catch (e) {
       lhs[p] = rhs[p];
     }
-  }
+  });
 
   return lhs;
 }

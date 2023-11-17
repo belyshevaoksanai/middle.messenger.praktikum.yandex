@@ -4,13 +4,9 @@ import store from '../core/Store';
 
 class AuthController {
   static async fetchUser() {
-    try {
-      const user = await authApi.getUser();
+    const user = await authApi.getUser();
 
-      store.setState('user', user);
-    } catch (e) {
-      throw e;
-    }
+    store.setState('user', user);
   }
 
   static async signin(data: ISigninData) {
