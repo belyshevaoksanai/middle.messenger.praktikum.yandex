@@ -21,7 +21,7 @@ class ProfileComponent extends Block {
 
 const mapStateToProps = (state: IState) => ({
   ...state.user,
-})
+});
 
 const Profile = withStore(mapStateToProps)(ProfileComponent);
 

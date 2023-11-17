@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     case Routes.Register:
       isProtectedRoute = false;
       break;
-  };
+  }
 
   if (!Object.values(Routes).includes(window.location.pathname as Routes)) {
     router.start();

@@ -8,9 +8,9 @@ class CreateDailog extends Dialog {
         close: () => {
           this.setProps({
             isShow: false,
-          })
-        }
-      }
+          });
+        },
+      },
     });
   }
 

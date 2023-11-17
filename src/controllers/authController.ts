@@ -1,12 +1,12 @@
-import authApi, { ISigninData, ISignupData } from "../api/authApi";
-import router from "../core/Router/router";
-import store from "../core/Store";
+import authApi, { ISigninData, ISignupData } from '../api/authApi';
+import router from '../core/Router/router';
+import store from '../core/Store';
 
 class AuthController {
   static async fetchUser() {
     try {
       const user = await authApi.getUser();
-  
+
       store.setState('user', user);
     } catch (e) {
       throw e;

@@ -27,16 +27,14 @@ class Block<P extends Record<string, any> = any> {
   constructor(propsWithChildren?: P) {
     const eventBus = new EventBus();
 
-
     if (propsWithChildren) {
-      const {children, props} = this._getChildrenAndProps(propsWithChildren);
+      const { children, props } = this._getChildrenAndProps(propsWithChildren);
       this.children = children;
       this.props = this._makePropsProxy({ ...props, __id: this.id });
     } else {
       this.children = {};
       this.props = this._makePropsProxy({ __id: this.id } as any as P);
     }
-
 
     this.eventBus = () => eventBus;
 

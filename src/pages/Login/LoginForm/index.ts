@@ -34,8 +34,8 @@ class LoginForm extends Form {
       events: {
         click: () => {
           router.go(Routes.Register);
-        }
-      }
+        },
+      },
     });
   }
 

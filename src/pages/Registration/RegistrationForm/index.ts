@@ -62,8 +62,8 @@ class RegistrationForm extends Form {
       events: {
         click: () => {
           router.go(Routes.Login);
-        }
-      }
+        },
+      },
     });
   }
 

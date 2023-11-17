@@ -12,17 +12,17 @@ abstract class Dialog extends Block {
   constructor(props: IDialogProps) {
     super({
       ...props,
-      class: classes['overlay'],
+      class: classes.overlay,
       closeButton: new IconButton({
         iconUrl: crossIcon,
         events: {
           click: () => {
             this.setProps({
               isShow: false,
-            })
-          }
-        }
-      })
+            });
+          },
+        },
+      }),
     });
   }
 

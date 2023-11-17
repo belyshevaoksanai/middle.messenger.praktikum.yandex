@@ -44,8 +44,8 @@ class PasswordForm extends Form {
       events: {
         click: () => {
           router.go(Routes.Profile);
-        }
-      }
+        },
+      },
     });
     this.children.inputAvatar = new AvatarInput({
       name: 'avatar',
@@ -56,8 +56,8 @@ class PasswordForm extends Form {
             formData.append('avatar', event.target.files?.[0]);
             UserController.updateAvatar(formData);
           }
-        }
-      }
+        },
+      },
     });
   }
 
@@ -66,7 +66,7 @@ class PasswordForm extends Form {
       if (value.user) {
         (this.children.inputAvatar as Block).setProps({
           value: value.user.avatar,
-        })
+        });
       }
     });
     AuthController.fetchUser();
@@ -83,6 +83,6 @@ class PasswordForm extends Form {
 
 const mapStateToProps = (state: IState) => ({
   ...state.user,
-})
+});
 
 export default withStore(mapStateToProps)(PasswordForm);

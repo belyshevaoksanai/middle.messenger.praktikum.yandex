@@ -1,4 +1,4 @@
-import HTTPTransport from "../core/HttpTransport/httpTransport";
+import HTTPTransport from '../core/HttpTransport/httpTransport';
 
 abstract class BaseAPI {
   protected http: HTTPTransport<any>;

@@ -21,7 +21,7 @@ class AddUserForm extends Form {
     });
   }
 
-  async submit(value: {id: string}): Promise<void> {
+  async submit(value: { id: string }): Promise<void> {
     await ChatController.addUserInChat({
       users: [value.id],
       chatId: this.chatId,
@@ -45,6 +45,6 @@ class AddUserForm extends Form {
 
 const mapStateToProps = (state: IState) => ({
   chatId: state.chatId,
-})
+});
 
 export default withStore(mapStateToProps)(AddUserForm);

@@ -27,8 +27,8 @@ class ProfileForm extends Form {
             formData.append('avatar', event.target.files?.[0]);
             UserController.updateAvatar(formData);
           }
-        }
-      }
+        },
+      },
     });
     this.children.title = new Title({ text: '' });
     this.children.inputEmail = new Input({
@@ -70,8 +70,8 @@ class ProfileForm extends Form {
       events: {
         click: () => {
           router.go(Routes.Password);
-        }
-      }
+        },
+      },
     });
     this.children.buttonExit = new Button({
       label: 'Выйти',
@@ -79,8 +79,8 @@ class ProfileForm extends Form {
       events: {
         click: () => {
           AuthController.logout();
-        }
-      }
+        },
+      },
     });
     this.children.buttonToChat = new Button({
       label: 'Вернуться в чат',
@@ -88,8 +88,8 @@ class ProfileForm extends Form {
       events: {
         click: () => {
           router.go('/chat');
-        }
-      }
+        },
+      },
     });
   }
 
@@ -119,13 +119,13 @@ class ProfileForm extends Form {
         });
         (this.children.inputAvatar as Block).setProps({
           value: value.user.avatar,
-        })
+        });
       }
     });
     AuthController.fetchUser();
   }
 
-  submit({avatar, ...values}: ProfileFormModel): void {
+  submit({ avatar, ...values }: ProfileFormModel): void {
     UserController.updateUser(values);
   }
 
@@ -136,6 +136,6 @@ class ProfileForm extends Form {
 
 const mapStateToProps = (state: IState) => ({
   ...state.user,
-})
+});
 
 export default withStore(mapStateToProps)(ProfileForm);

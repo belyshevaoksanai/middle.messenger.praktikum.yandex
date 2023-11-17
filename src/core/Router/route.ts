@@ -16,7 +16,7 @@ function render(rootQuery: string, block: Block) {
   root.append(block.getContent()!);
 
   return root;
-};
+}
 
 export default class Route {
   private _block: null | Block = null;
@@ -52,7 +52,6 @@ export default class Route {
     if (!this._block) {
       this._block = new this._blockClass();
       render(this._props.rootQuery, this._block as Block);
-      return;
     }
   }
 }

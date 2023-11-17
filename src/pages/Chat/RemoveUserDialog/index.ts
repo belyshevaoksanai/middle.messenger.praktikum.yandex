@@ -8,9 +8,9 @@ class RemoveUserDailog extends Dialog {
         close: () => {
           this.setProps({
             isShow: false,
-          })
-        }
-      }
+          });
+        },
+      },
     });
   }
 

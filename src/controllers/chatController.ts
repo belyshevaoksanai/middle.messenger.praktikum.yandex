@@ -1,5 +1,5 @@
-import chatApi, { IAddUserChat, ICreateChat } from "../api/chatApi";
-import store from "../core/Store";
+import chatApi, { IAddUserChat, ICreateChat } from '../api/chatApi';
+import store from '../core/Store';
 
 class ChatController {
   static async getChats() {

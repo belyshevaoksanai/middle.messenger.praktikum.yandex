@@ -1,4 +1,3 @@
-
 import Block from '../../core/Block/block';
 import { ImageInputProps } from './ImageInput.model';
 import classes from './ImageInput.module.scss';

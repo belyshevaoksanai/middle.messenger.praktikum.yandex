@@ -36,6 +36,7 @@ function queryStringify(data?: DataType) {
 
 class HTTPTransport<Data extends DataType> {
   static API_URL = 'https://ya-praktikum.tech/api/v2';
+
   protected endpoint: string = '';
 
   constructor(endpoint: string) {

@@ -21,7 +21,7 @@ class RemoveUserForm extends Form {
     });
   }
 
-  async submit(value: {id: string}): Promise<void> {
+  async submit(value: { id: string }): Promise<void> {
     await ChatController.removeUserInChat({
       users: [value.id],
       chatId: this.chatId,
@@ -45,6 +45,6 @@ class RemoveUserForm extends Form {
 
 const mapStateToProps = (state: IState) => ({
   chatId: state.chatId,
-})
+});
 
 export default withStore(mapStateToProps)(RemoveUserForm);

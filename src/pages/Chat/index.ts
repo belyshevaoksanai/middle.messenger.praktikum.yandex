@@ -37,10 +37,10 @@ class Chat extends Block {
     this.children.form = new ChatForm({
       submit: (values: any) => {
         this.ws?.send({
-          type: "message",
+          type: 'message',
           content: values.message,
         });
-      }
+      },
     });
     this.children.createDialog = new CreateDailog({
       isShow: false,
@@ -59,8 +59,8 @@ class Chat extends Block {
           (this.children.createDialog as Block).setProps({
             isShow: true,
           });
-        }
-      }
+        },
+      },
     });
     this.children.addUserButton = new Button({
       variant: 'filled',
@@ -70,7 +70,7 @@ class Chat extends Block {
           (this.children.addUserDialog as Block).setProps({
             isShow: true,
           });
-        }
+        },
       },
       disabled: true,
     });
@@ -83,7 +83,7 @@ class Chat extends Block {
           (this.children.removeUserDialog as Block).setProps({
             isShow: true,
           });
-        }
+        },
       },
       disabled: true,
     });
@@ -102,11 +102,11 @@ class Chat extends Block {
           console.log(e);
         });
         this.ws.on(WSTransportEvents.Message, (message) => {
-          store.setState('messages', (store.getState().messages || [])?.concat(message))
-        })
+          store.setState('messages', (store.getState().messages || [])?.concat(message));
+        });
       }
     });
-    
+
     ChatController.getChatToken(id);
   }
 
@@ -118,7 +118,7 @@ class Chat extends Block {
           active: chat.id === this.props.activeDialog,
           events: {
             click: () => {
-              this.setProps({activeDialog: chat.id});
+              this.setProps({ activeDialog: chat.id });
               (this.children.chatDialogs as Block[])[i].setProps({
                 active: true,
               });
@@ -130,17 +130,17 @@ class Chat extends Block {
               });
               store.setState('chatId', chat.id);
               this.chatConnect(chat.id);
-            }
-          }
+            },
+          },
         }));
       }
 
       if (value.messages) {
         this.children.messages = value.messages?.map((message: any) => (
           new Message({
-          text: message.content,
-          isCurrentUser: message.user_id === this.props.user.id,
-        })));
+            text: message.content,
+            isCurrentUser: message.user_id === this.props.user.id,
+          })));
       }
     });
     ChatController.getChats();
@@ -156,6 +156,6 @@ const mapStateToProps = (state: IState) => ({
   chatToken: state.chatToken,
   user: state.user,
   messages: state.messages,
-})
+});
 
 export default withStore(mapStateToProps)(Chat);

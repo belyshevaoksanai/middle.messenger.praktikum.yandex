@@ -1,7 +1,7 @@
-import { Routes } from "..";
-import userApi, { IPasswordUpdateData, IUserUpdateData } from "../api/userApi";
-import router from "../core/Router/router";
-import AuthController from "./authController";
+import { Routes } from '..';
+import userApi, { IPasswordUpdateData, IUserUpdateData } from '../api/userApi';
+import router from '../core/Router/router';
+import AuthController from './authController';
 
 class UserController {
   static async updateUser(data: IUserUpdateData) {
