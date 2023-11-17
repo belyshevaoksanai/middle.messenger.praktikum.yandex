@@ -1,10 +1,12 @@
-import Block from '../../utils/block';
+import Block from '../../core/Block/block';
 import Input from '../Input';
 
 abstract class Form extends Block {
-  constructor() {
-    super('form', {
+  constructor({events, ...props}: any) {
+    super({
+      ...props,
       events: {
+        ...events,
         submit: (event: any) => {
           event.preventDefault();
 
@@ -40,6 +42,12 @@ abstract class Form extends Block {
       }
     });
     return res;
+  }
+
+  abstract renderForm(): string;
+
+  render() {
+    return this.compile(`<form>${this.renderForm()}</form>`, this.props);
   }
 }
 

@@ -1,5 +1,5 @@
 import TypeWithClass from '../../models/block-helpers';
-import Block from '../../utils/block';
+import Block from '../../core/Block/block';
 import classes from './Title.module.scss';
 
 interface TitleProps {
@@ -8,14 +8,14 @@ interface TitleProps {
 
 class Title extends Block<TypeWithClass<TitleProps>> {
   constructor(props: TitleProps) {
-    super('h1', {
+    super({
       ...props,
       class: classes.title,
     });
   }
 
   render() {
-    return this.compile('{{text}}', this.props);
+    return this.compile('<h1 class="{{class}}">{{text}}</h1>', this.props);
   }
 }
 

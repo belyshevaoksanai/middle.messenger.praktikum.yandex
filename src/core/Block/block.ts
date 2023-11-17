@@ -1,7 +1,8 @@
 import Handlebars from 'handlebars';
 import { nanoid } from 'nanoid';
 
-import EventBus from './event-bus';
+import EventBus from '../EventBus/eventBus';
+import isEqual from '../../utils/isEqual';
 
 class Block<P extends Record<string, any> = any> {
   static EVENTS = {
@@ -21,22 +22,21 @@ class Block<P extends Record<string, any> = any> {
 
   private _element: HTMLElement | null = null;
 
-  private _meta: { tagName: string; props: P; };
-
   private _eventListenerController: null | AbortController = null;
 
-  constructor(tagName: string, propsWithChildren: P) {
+  constructor(propsWithChildren?: P) {
     const eventBus = new EventBus();
 
-    const { props, children } = this._getChildrenAndProps(propsWithChildren);
 
-    this._meta = {
-      tagName,
-      props: props as P,
-    };
+    if (propsWithChildren) {
+      const {children, props} = this._getChildrenAndProps(propsWithChildren);
+      this.children = children;
+      this.props = this._makePropsProxy({ ...props, __id: this.id });
+    } else {
+      this.children = {};
+      this.props = this._makePropsProxy({ __id: this.id } as any as P);
+    }
 
-    this.children = children;
-    this.props = this._makePropsProxy({ ...props, __id: this.id });
 
     this.eventBus = () => eventBus;
 
@@ -54,7 +54,7 @@ class Block<P extends Record<string, any> = any> {
       if (value instanceof Block) {
         children[key as string] = value;
       } else if (Array.isArray(value) && value[0] instanceof Block) {
-        children[key as string] = value;
+        children[key as string] = value as Block[];
       } else {
         props[key] = value;
       }
@@ -84,20 +84,13 @@ class Block<P extends Record<string, any> = any> {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
-  }
-
-  _createResources() {
-    const { tagName } = this._meta;
-    this._element = this._createDocumentElement(tagName);
+    eventBus.on(Block.EVENTS.FLOW_RENDER, (isInit) => this._render.bind(this)(isInit));
   }
 
   private _init() {
-    this._createResources();
-
     this.init();
 
-    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER, true);
   }
 
   protected init() {}
@@ -120,18 +113,14 @@ class Block<P extends Record<string, any> = any> {
     });
   }
 
-  // private _componentDidUpdate(oldProps: P, newProps: P) {
-  private _componentDidUpdate() {
-    // if (this.componentDidUpdate(oldProps, newProps)) {
-    if (this.componentDidUpdate()) {
+  private _componentDidUpdate(oldProps: P, newProps: P) {
+    if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
-  // TODO в 3 спринте
-  // protected componentDidUpdate(oldProps: P, newProps: P) {
-  protected componentDidUpdate() {
-    return true;
+  protected componentDidUpdate(oldProps: P, newProps: P) {
+    return !isEqual(oldProps, newProps);
   }
 
   setProps = (nextProps: P) => {
@@ -146,19 +135,28 @@ class Block<P extends Record<string, any> = any> {
     return this._element;
   }
 
-  private _render() {
+  private _render(isInit = false) {
     const fragment = this.render();
 
     this._removeEvents();
-    this._element!.innerHTML = '';
 
-    this._element!.append(fragment);
+    const newElement = fragment.firstElementChild as HTMLElement;
 
     if (this.props.class) {
-      this._element!.classList.add(this.props.class);
+      newElement.classList.add(this.props.class);
     }
 
+    if (this._element && newElement) {
+      this._element.replaceWith(newElement);
+    }
+
+    this._element = newElement;
+
     this._addEvents();
+
+    if (isInit) {
+      this.dispatchComponentDidMount();
+    }
   }
 
   protected compile(template: string, context: Record<string, any>) {

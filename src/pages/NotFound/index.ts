@@ -1,11 +1,11 @@
-import Block from '../../utils/block';
+import Block from '../../core/Block/block';
 import tmpl from './NotFound.tmpl';
 import classes from './NotFound.module.scss';
 import Link from '../../components/Link';
 
 class NotFound extends Block {
   constructor() {
-    super('div', {
+    super({
       class: classes.registration,
     });
   }

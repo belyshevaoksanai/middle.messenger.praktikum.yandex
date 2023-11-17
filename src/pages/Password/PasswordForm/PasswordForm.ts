@@ -1,6 +1,6 @@
-const tmpl = (classes: Record<string, string>, editAvatar: string) => `
+const tmpl = (classes: Record<string, string>) => `
     <div class="${classes.titleContainer}">
-        <img src="${editAvatar}"  class="${classes.avatarImg}"/>
+        {{{inputAvatar}}}
     </div>
     <div class="${classes.registrationForm}">
         {{{inputOldPassword}}}

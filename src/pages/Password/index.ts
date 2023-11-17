@@ -1,20 +1,20 @@
 import classes from './Password.module.scss';
-import Block from '../../utils/block';
+import Block from '../../core/Block/block';
 import PasswordForm from './PasswordForm';
 
 class Password extends Block {
   constructor() {
-    super('div', {
+    super({
       class: classes.registration,
     });
   }
 
   init(): void {
-    this.children.form = new PasswordForm();
+    this.children.form = new PasswordForm({});
   }
 
   protected render(): DocumentFragment {
-    return this.compile('{{{form}}}', this.props);
+    return this.compile('<div class="{{class}}">{{{form}}}<div>', this.props);
   }
 }
 
