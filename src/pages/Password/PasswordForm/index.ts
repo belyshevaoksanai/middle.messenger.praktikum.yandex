@@ -7,12 +7,13 @@ import Form from '../../../components/Form';
 import { required, validatePassword } from '../../../utils/validate';
 import PasswordFormModel from './PasswordForm.model';
 import router from '../../../core/Router/router';
-import { Routes } from '../../..';
 import UserController from '../../../controllers/userController';
 import AvatarInput from '../../../components/AvatarInput';
 import AuthController from '../../../controllers/authController';
 import Block from '../../../core/Block/block';
-import store, { IState, StoreEvents, withStore } from '../../../core/Store';
+import store, { IState, StoreEvents } from '../../../core/Store';
+import Routes from '../../../enum/routes';
+import withStore from '../../../core/Store/withStore';
 
 class PasswordForm extends Form {
   init(): void {
@@ -44,8 +45,8 @@ class PasswordForm extends Form {
       events: {
         click: () => {
           router.go(Routes.Profile);
-        }
-      }
+        },
+      },
     });
     this.children.inputAvatar = new AvatarInput({
       name: 'avatar',
@@ -56,8 +57,8 @@ class PasswordForm extends Form {
             formData.append('avatar', event.target.files?.[0]);
             UserController.updateAvatar(formData);
           }
-        }
-      }
+        },
+      },
     });
   }
 
@@ -66,7 +67,7 @@ class PasswordForm extends Form {
       if (value.user) {
         (this.children.inputAvatar as Block).setProps({
           value: value.user.avatar,
-        })
+        });
       }
     });
     AuthController.fetchUser();
@@ -83,6 +84,6 @@ class PasswordForm extends Form {
 
 const mapStateToProps = (state: IState) => ({
   ...state.user,
-})
+});
 
 export default withStore(mapStateToProps)(PasswordForm);

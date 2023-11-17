@@ -2,7 +2,7 @@ import Block from '../../core/Block/block';
 import Input from '../Input';
 
 abstract class Form extends Block {
-  constructor({events, ...props}: any) {
+  constructor({ events, ...props }: any) {
     super({
       ...props,
       events: {

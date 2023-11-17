@@ -9,6 +9,7 @@ export enum WSTransportEvents {
 
 class WSTransport extends EventBus {
   static API_URL = 'wss://ya-praktikum.tech/ws';
+
   private socket?: WebSocket;
 
   private pingInterval?: ReturnType<typeof setInterval>;

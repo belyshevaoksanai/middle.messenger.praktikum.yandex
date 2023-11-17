@@ -1,4 +1,3 @@
-
 import Block from '../../core/Block/block';
 import editAvatar from '../../assets/images/edit-avatar.svg';
 import ImageInput from '../ImageInput';

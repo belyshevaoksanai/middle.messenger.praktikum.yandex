@@ -8,9 +8,9 @@ class AddUserDailog extends Dialog {
         close: () => {
           this.setProps({
             isShow: false,
-          })
-        }
-      }
+          });
+        },
+      },
     });
   }
 

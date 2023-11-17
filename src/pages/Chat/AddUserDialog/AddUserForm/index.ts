@@ -2,7 +2,8 @@ import Button from '../../../../components/Button';
 import Form from '../../../../components/Form';
 import Input from '../../../../components/Input';
 import ChatController from '../../../../controllers/chatController';
-import store, { IState, StoreEvents, withStore } from '../../../../core/Store';
+import store, { IState, StoreEvents } from '../../../../core/Store';
+import withStore from '../../../../core/Store/withStore';
 import { required } from '../../../../utils/validate';
 import tmpl from './AddUserForm';
 import classes from './AddUserForm.module.scss';
@@ -21,7 +22,7 @@ class AddUserForm extends Form {
     });
   }
 
-  async submit(value: {id: string}): Promise<void> {
+  async submit(value: { id: string }): Promise<void> {
     await ChatController.addUserInChat({
       users: [value.id],
       chatId: this.chatId,
@@ -45,6 +46,6 @@ class AddUserForm extends Form {
 
 const mapStateToProps = (state: IState) => ({
   chatId: state.chatId,
-})
+});
 
 export default withStore(mapStateToProps)(AddUserForm);

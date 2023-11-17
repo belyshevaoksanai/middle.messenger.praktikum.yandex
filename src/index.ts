@@ -8,17 +8,7 @@ import Registration from './pages/Registration';
 import './reset.scss';
 import router from './core/Router/router';
 import AuthController from './controllers/authController';
-
-export enum Routes {
-  Index = '/',
-  Login = '/login',
-  Register = '/signup',
-  Profile = '/profile',
-  Chat = '/chat',
-  Password = '/password',
-  ErrorPage = '/error-page',
-  NotFound = '/not-found',
-}
+import Routes from './enum/routes';
 
 window.addEventListener('DOMContentLoaded', async () => {
   router
@@ -39,7 +29,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     case Routes.Register:
       isProtectedRoute = false;
       break;
-  };
+    default:
+  }
 
   if (!Object.values(Routes).includes(window.location.pathname as Routes)) {
     router.start();

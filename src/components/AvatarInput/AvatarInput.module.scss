@@ -12,7 +12,7 @@
         position: relative;
         display: block;
 
-        &:hover:after {
+        &:hover::after {
             content: "Изменить";
             position: absolute;
             top: 0;
@@ -22,11 +22,9 @@
             background: aliceblue;
             opacity: 0.3;
             cursor: pointer;
-    
             display: flex;
             align-items: center;
             justify-content: center;
-    
             color: black;
             font-weight: 600;
             font-size: 20px;

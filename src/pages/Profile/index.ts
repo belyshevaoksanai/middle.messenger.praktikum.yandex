@@ -1,7 +1,8 @@
 import classes from './Profile.module.scss';
 import Block from '../../core/Block/block';
 import ProfileForm from './ProfileForm';
-import { IState, withStore } from '../../core/Store';
+import { IState } from '../../core/Store';
+import withStore from '../../core/Store/withStore';
 
 class ProfileComponent extends Block {
   constructor() {
@@ -21,7 +22,7 @@ class ProfileComponent extends Block {
 
 const mapStateToProps = (state: IState) => ({
   ...state.user,
-})
+});
 
 const Profile = withStore(mapStateToProps)(ProfileComponent);
 

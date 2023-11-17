@@ -10,11 +10,12 @@ import {
 import ProfileFormModel from './ProfileForm.model';
 import AuthController from '../../../controllers/authController';
 import router from '../../../core/Router/router';
-import { Routes } from '../../..';
-import store, { IState, StoreEvents, withStore } from '../../../core/Store';
+import store, { IState, StoreEvents } from '../../../core/Store';
 import Block from '../../../core/Block/block';
 import UserController from '../../../controllers/userController';
 import AvatarInput from '../../../components/AvatarInput';
+import Routes from '../../../enum/routes';
+import withStore from '../../../core/Store/withStore';
 
 class ProfileForm extends Form {
   init(): void {
@@ -27,8 +28,8 @@ class ProfileForm extends Form {
             formData.append('avatar', event.target.files?.[0]);
             UserController.updateAvatar(formData);
           }
-        }
-      }
+        },
+      },
     });
     this.children.title = new Title({ text: '' });
     this.children.inputEmail = new Input({
@@ -70,8 +71,8 @@ class ProfileForm extends Form {
       events: {
         click: () => {
           router.go(Routes.Password);
-        }
-      }
+        },
+      },
     });
     this.children.buttonExit = new Button({
       label: 'Выйти',
@@ -79,8 +80,8 @@ class ProfileForm extends Form {
       events: {
         click: () => {
           AuthController.logout();
-        }
-      }
+        },
+      },
     });
     this.children.buttonToChat = new Button({
       label: 'Вернуться в чат',
@@ -88,8 +89,8 @@ class ProfileForm extends Form {
       events: {
         click: () => {
           router.go('/chat');
-        }
-      }
+        },
+      },
     });
   }
 
@@ -119,13 +120,13 @@ class ProfileForm extends Form {
         });
         (this.children.inputAvatar as Block).setProps({
           value: value.user.avatar,
-        })
+        });
       }
     });
     AuthController.fetchUser();
   }
 
-  submit({avatar, ...values}: ProfileFormModel): void {
+  submit({ avatar, ...values }: ProfileFormModel): void {
     UserController.updateUser(values);
   }
 
@@ -136,6 +137,6 @@ class ProfileForm extends Form {
 
 const mapStateToProps = (state: IState) => ({
   ...state.user,
-})
+});
 
 export default withStore(mapStateToProps)(ProfileForm);

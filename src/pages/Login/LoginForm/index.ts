@@ -8,7 +8,7 @@ import { required } from '../../../utils/validate';
 import AuthController from '../../../controllers/authController';
 import { ISigninData } from '../../../api/authApi';
 import router from '../../../core/Router/router';
-import { Routes } from '../../..';
+import Routes from '../../../enum/routes';
 
 class LoginForm extends Form {
   init(): void {
@@ -34,8 +34,8 @@ class LoginForm extends Form {
       events: {
         click: () => {
           router.go(Routes.Register);
-        }
-      }
+        },
+      },
     });
   }
 

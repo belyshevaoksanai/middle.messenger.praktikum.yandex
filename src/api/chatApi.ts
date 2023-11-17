@@ -23,15 +23,15 @@ class ChatAPI extends BaseAPI {
   }
 
   getChatToken(id: string) {
-    return this.http.post<{token: string}>(`/token/${id}`);
+    return this.http.post<{ token: string }>(`/token/${id}`);
   }
 
   addUserInChat(data: IAddUserChat) {
-    return this.http.put(`/users`, { data });
+    return this.http.put('/users', { data });
   }
 
   removeUserInChat(data: IAddUserChat) {
-    return this.http.delete(`/users`, { data });
+    return this.http.delete('/users', { data });
   }
 }
 
