@@ -1,5 +1,5 @@
 import TypeWithClass from '../../models/block-helpers';
-import Block from '../../utils/block';
+import Block from '../../core/Block/block';
 import InputError from './Error';
 import InputField from './InputField';
 import classes from './Input.module.scss';
@@ -9,6 +9,7 @@ interface InputProps {
   label?: string;
   name: string;
   variant?: 'standard' | 'filled';
+  type?: 'password';
   events?: {
     focus?: () => void;
     blur?: () => void;
@@ -20,7 +21,7 @@ class Input extends Block<TypeWithClass<InputProps>> {
   isValid: boolean = true;
 
   constructor(props: InputProps) {
-    super('div', {
+    super({
       ...props,
       class: classes.inputContainer,
     });

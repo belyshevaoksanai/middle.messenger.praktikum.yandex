@@ -3,6 +3,8 @@
     border-right: 1px solid $border-color;
     padding: 10px;
     background-color: $background-dark;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .chatContainer {
@@ -13,6 +15,7 @@
 
 .chatPage {
     height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
@@ -27,6 +30,8 @@
 
 .dialogList {
     margin-top: 14px;
+    overflow-y: auto;
+    max-height: calc(100% - 120px);
 }
 
 .emptyChat {
@@ -38,8 +43,32 @@
     flex-grow: 1;
 }
 
+.fullChat {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    row-gap: 16px;
+    height: 100%;
+    overflow-y: auto;
+}
+
 .messageContainer {
     border-top: 1px solid $border-color;
     padding: 12px 0;
     margin: 0 12px;
+}
+
+.chatHeader {
+    border-bottom: 1px solid $border-color;
+    padding: 10px;
+
+    button {
+        width: 300px;
+    }
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
 }

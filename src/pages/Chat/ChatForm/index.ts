@@ -6,6 +6,7 @@ import sendIcon from '../../../assets/icons/arrow-right-2.svg';
 import Form from '../../../components/Form';
 import { required } from '../../../utils/validate';
 import ChatFormModel from './ChatForm.model';
+import Block from '../../../core/Block/block';
 
 class ChatForm extends Form {
   init(): void {
@@ -21,12 +22,14 @@ class ChatForm extends Form {
   }
 
   submit(values: ChatFormModel): void {
-    console.log('form value:');
-    console.log(values);
+    this.props.submit(values);
+    ((this.children.inputMessage as Block).children.input as Block).setProps({
+      value: '',
+    });
   }
 
-  protected render(): DocumentFragment {
-    return this.compile(tmpl(classes), this.props);
+  renderForm(): string {
+    return tmpl(classes);
   }
 }
 

@@ -1,0 +1,17 @@
+.message {
+    background: #F8F8F8;
+    color: #1E1E1E;
+    padding: 16px;
+    border-radius: 12px;
+    width: fit-content;
+}
+
+.currentUserMessage {
+    background: #E4EDFD;
+    color: #1E1E1E;
+    padding: 16px;
+    border-radius: 12px;
+    width: fit-content;
+
+    align-self: flex-start;
+}

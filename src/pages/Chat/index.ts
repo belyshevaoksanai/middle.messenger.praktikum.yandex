@@ -1,17 +1,27 @@
 import tmpl from './Chat.tmpl';
 import classes from './Chat.module.scss';
 import arrowUrl from '../../assets/icons/arrow-right.svg';
-import Block from '../../utils/block';
+import Block from '../../core/Block/block';
 import Link from '../../components/Link';
 import Input from '../../components/Input';
-import CHAT_DATA from './mock';
 import { DialogItem } from '../../components/DialogItem';
 import ChatForm from './ChatForm';
+import ChatController from '../../controllers/chatController';
+import Button from '../../components/Button';
+import CreateDailog from './CreateDailog';
+import store, { IState, StoreEvents, withStore } from '../../core/Store';
+import WSTransport, { WSTransportEvents } from '../../core/WsTransport/wsTransport';
+import AddUserDailog from './AddUserDialog';
+import Message from './Message';
+import RemoveUserDailog from './RemoveUserDialog';
 
 class Chat extends Block {
+  ws: WSTransport | undefined;
+
   constructor() {
-    super('div', {
+    super({
       class: classes.chatPage,
+      activeDialog: null,
     });
   }
 
@@ -24,8 +34,116 @@ class Chat extends Block {
       variant: 'filled',
       name: 'search',
     });
-    this.children.chatDialogs = CHAT_DATA.map((chat) => new DialogItem(chat));
-    this.children.form = new ChatForm();
+    this.children.form = new ChatForm({
+      submit: (values: any) => {
+        this.ws?.send({
+          type: "message",
+          content: values.message,
+        });
+      }
+    });
+    this.children.createDialog = new CreateDailog({
+      isShow: false,
+    });
+    this.children.addUserDialog = new AddUserDailog({
+      isShow: false,
+    });
+    this.children.removeUserDialog = new RemoveUserDailog({
+      isShow: false,
+    });
+    this.children.createChatButton = new Button({
+      variant: 'filled',
+      label: 'Создать чат',
+      events: {
+        click: () => {
+          (this.children.createDialog as Block).setProps({
+            isShow: true,
+          });
+        }
+      }
+    });
+    this.children.addUserButton = new Button({
+      variant: 'filled',
+      label: 'Добавить пользователя',
+      events: {
+        click: () => {
+          (this.children.addUserDialog as Block).setProps({
+            isShow: true,
+          });
+        }
+      },
+      disabled: true,
+    });
+
+    this.children.removeUserButton = new Button({
+      variant: 'filled',
+      label: 'Удалить пользователя',
+      events: {
+        click: () => {
+          (this.children.removeUserDialog as Block).setProps({
+            isShow: true,
+          });
+        }
+      },
+      disabled: true,
+    });
+  }
+
+  chatConnect(id: string): void {
+    store.setState('messages', []);
+    store.on(StoreEvents.Update, (value: IState) => {
+      if (value.chatToken) {
+        if (this.ws) {
+          this.ws.close();
+        }
+        this.ws = new WSTransport(`/chats/${value.user?.id}/${id}/${value.chatToken}`);
+        this.ws.connected().then(() => {
+        }).catch((e) => {
+          console.log(e);
+        });
+        this.ws.on(WSTransportEvents.Message, (message) => {
+          store.setState('messages', (store.getState().messages || [])?.concat(message))
+        })
+      }
+    });
+    
+    ChatController.getChatToken(id);
+  }
+
+  protected componentDidMount(): void {
+    store.on(StoreEvents.Update, (value: IState) => {
+      if (value.chats) {
+        this.children.chatDialogs = value.chats?.map((chat, i) => new DialogItem({
+          ...chat,
+          active: chat.id === this.props.activeDialog,
+          events: {
+            click: () => {
+              this.setProps({activeDialog: chat.id});
+              (this.children.chatDialogs as Block[])[i].setProps({
+                active: true,
+              });
+              (this.children.addUserButton as Block).setProps({
+                disabled: false,
+              });
+              (this.children.removeUserButton as Block).setProps({
+                disabled: false,
+              });
+              store.setState('chatId', chat.id);
+              this.chatConnect(chat.id);
+            }
+          }
+        }));
+      }
+
+      if (value.messages) {
+        this.children.messages = value.messages?.map((message: any) => (
+          new Message({
+          text: message.content,
+          isCurrentUser: message.user_id === this.props.user.id,
+        })));
+      }
+    });
+    ChatController.getChats();
   }
 
   protected render(): DocumentFragment {
@@ -33,4 +151,11 @@ class Chat extends Block {
   }
 }
 
-export default Chat;
+const mapStateToProps = (state: IState) => ({
+  chats: state.chats,
+  chatToken: state.chatToken,
+  user: state.user,
+  messages: state.messages,
+})
+
+export default withStore(mapStateToProps)(Chat);

@@ -3,10 +3,10 @@ const tmpl = (classes: Record<string, string>) => `
         {{{title}}}
     </div>
     <div class="${classes.registrationForm}">
-        {{{inputEmail}}}
         {{{inputLogin}}}
         {{{inputName}}}
         {{{inputSecondName}}}
+        {{{inputEmail}}}
         {{{inputPhone}}}
         {{{inputPassword}}}
         {{{inputConfirmPassword}}}

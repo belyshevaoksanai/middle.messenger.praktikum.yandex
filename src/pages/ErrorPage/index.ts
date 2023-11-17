@@ -1,11 +1,11 @@
 import tmpl from './ErrorPage.tmpl';
 import classes from './ErrorPage.module.scss';
 import Link from '../../components/Link';
-import Block from '../../utils/block';
+import Block from '../../core/Block/block';
 
 class ErrorPage extends Block {
   constructor() {
-    super('div', {
+    super({
       class: classes.registration,
     });
   }

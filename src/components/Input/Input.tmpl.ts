@@ -1,4 +1,5 @@
 const tmpl = (classes: Record<string, string>) => `
+<div class="{{class}}">
     <div class="${classes.inputContainer}">
         {{#if label}}
             <label class="${classes.label}">{{label}}</label>
@@ -6,6 +7,7 @@ const tmpl = (classes: Record<string, string>) => `
         {{{input}}}
         {{{error}}}
     </div>
+</div>
 `;
 
 export default tmpl;
