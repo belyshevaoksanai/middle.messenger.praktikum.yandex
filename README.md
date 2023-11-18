@@ -1,11 +1,11 @@
 Мессенджер выполняется на курсах "Мидл фронтенд-разработчик"
 
 Ссылки на развернутое приложение:
-https://yandex-praktikum-chat.onrender.com/profile
+https://yandex-praktikum-chat.onrender.com/
+https://yandex-praktikum-chat.onrender.com/settings
 https://yandex-praktikum-chat.onrender.com/password
-https://yandex-praktikum-chat.onrender.com/chat
-https://yandex-praktikum-chat.onrender.com/login
-https://yandex-praktikum-chat.onrender.com/signup
+https://yandex-praktikum-chat.onrender.com/messenger
+https://yandex-praktikum-chat.onrender.com/sign-up
 https://yandex-praktikum-chat.onrender.com/not-found
 https://yandex-praktikum-chat.onrender.com/error-page
 

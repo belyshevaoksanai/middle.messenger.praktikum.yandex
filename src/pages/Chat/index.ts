@@ -15,6 +15,7 @@ import AddUserDailog from './AddUserDialog';
 import Message from './Message';
 import RemoveUserDailog from './RemoveUserDialog';
 import withStore from '../../core/Store/withStore';
+import Routes from '../../enum/routes';
 
 class Chat extends Block {
   ws: WSTransport | undefined;
@@ -29,7 +30,7 @@ class Chat extends Block {
   init(): void {
     this.children.linkProfile = new Link({
       text: 'Профиль',
-      href: '/profile',
+      href: Routes.Profile,
     });
     this.children.inputSearch = new Input({
       variant: 'filled',

@@ -2,6 +2,7 @@ import Block from '../../core/Block/block';
 import tmpl from './NotFound.tmpl';
 import classes from './NotFound.module.scss';
 import Link from '../../components/Link';
+import Routes from '../../enum/routes';
 
 class NotFound extends Block {
   constructor() {
@@ -12,7 +13,7 @@ class NotFound extends Block {
 
   init(): void {
     this.children.link = new Link({
-      href: '/chat',
+      href: Routes.Chat,
       text: 'Назад к чатам',
     });
   }

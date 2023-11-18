@@ -1,9 +1,8 @@
 enum Routes {
-  Index = '/',
-  Login = '/login',
-  Register = '/signup',
-  Profile = '/profile',
-  Chat = '/chat',
+  Login = '/',
+  Register = '/sign-up',
+  Profile = '/settings',
+  Chat = '/messenger',
   Password = '/password',
   ErrorPage = '/error-page',
   NotFound = '/not-found',
