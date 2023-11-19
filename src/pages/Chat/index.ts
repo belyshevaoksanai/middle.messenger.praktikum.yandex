@@ -130,19 +130,21 @@ class Chat extends Block {
           ...chat,
           active: chat.id === this.props.activeDialog,
           events: {
-            click: () => {
-              this.setProps({ activeDialog: chat.id });
-              (this.children.chatDialogs as Block[])[i].setProps({
-                active: true,
-              });
-              (this.children.addUserButton as Block).setProps({
-                disabled: false,
-              });
-              (this.children.removeUserButton as Block).setProps({
-                disabled: false,
-              });
-              store.setState('chatId', chat.id);
-              this.chatConnect(chat.id);
+            click: (event) => {
+              if ((event.target as HTMLElement).localName !== 'label') {
+                this.setProps({ activeDialog: chat.id });
+                (this.children.chatDialogs as Block[])[i].setProps({
+                  active: true,
+                });
+                (this.children.addUserButton as Block).setProps({
+                  disabled: false,
+                });
+                (this.children.removeUserButton as Block).setProps({
+                  disabled: false,
+                });
+                store.setState('chatId', chat.id);
+                this.chatConnect(chat.id);
+              }
             },
           },
         }));

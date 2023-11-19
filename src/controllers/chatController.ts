@@ -46,6 +46,15 @@ class ChatController {
       console.error(e);
     }
   }
+
+  static async updateAvatar(data: FormData) {
+    try {
+      await chatApi.updateAvatar(data);
+      await this.getChats();
+    } catch (e) {
+      console.error(e);
+    }
+  }
 }
 
 export default ChatController;

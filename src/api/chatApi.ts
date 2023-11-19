@@ -33,6 +33,10 @@ class ChatAPI extends BaseAPI {
   removeUserInChat(data: IAddUserChat) {
     return this.http.delete('/users', { data });
   }
+
+  updateAvatar(data: FormData) {
+    return this.http.put('/avatar', { data });
+  }
 }
 
 export default new ChatAPI();

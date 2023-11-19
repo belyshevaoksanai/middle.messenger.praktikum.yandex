@@ -3,10 +3,13 @@ interface HTMLInputEvent extends Event {
 }
 
 export interface ImageInputProps {
-  name: string;
+  name?: string;
+  value?: string;
   events?: {
     focus?: () => void;
     blur?: () => void;
     change?: (event: HTMLInputEvent) => void;
+    click?: (event: HTMLInputEvent) => void;
   };
+  size?: string;
 }
