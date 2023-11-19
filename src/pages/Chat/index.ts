@@ -20,6 +20,8 @@ import Routes from '../../enum/routes';
 class Chat extends Block {
   ws: WSTransport | undefined;
 
+  chatToken: string = '';
+
   constructor() {
     super({
       class: classes.chatPage,
@@ -94,17 +96,26 @@ class Chat extends Block {
   chatConnect(id: string): void {
     store.setState('messages', []);
     store.on(StoreEvents.Update, (value: IState) => {
-      if (value.chatToken) {
+      if (value.chatToken && value.chatToken !== this.chatToken) {
+        this.chatToken = value.chatToken;
         if (this.ws) {
           this.ws.close();
         }
         this.ws = new WSTransport(`/chats/${value.user?.id}/${id}/${value.chatToken}`);
         this.ws.connected().then(() => {
+          this.ws?.send({
+            content: '0',
+            type: 'get old',
+          });
         }).catch((e) => {
           console.log(e);
         });
         this.ws.on(WSTransportEvents.Message, (message) => {
-          store.setState('messages', (store.getState().messages || [])?.concat(message));
+          if (Array.isArray(message)) {
+            store.setState('messages', message.reverse());
+          } else {
+            store.setState('messages', (store.getState().messages || [])?.concat(message));
+          }
         });
       }
     });
@@ -143,6 +154,15 @@ class Chat extends Block {
             text: message.content,
             isCurrentUser: message.user_id === this.props.user.id,
           })));
+        const timeoutId = setTimeout(() => {
+          if (window.document.getElementById('chatsList')
+            && window.document.getElementById('chatsList')?.scrollHeight) {
+            window.document.getElementById('chatsList')?.scrollTo({
+              top: window.document.getElementById('chatsList')?.scrollHeight,
+            });
+          }
+          clearTimeout(timeoutId);
+        });
       }
     });
     ChatController.getChats();
