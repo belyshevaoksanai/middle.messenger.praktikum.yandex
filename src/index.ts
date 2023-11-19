@@ -46,7 +46,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       router.go(window.location.pathname);
     }
   } catch (e) {
-    console.log(e, 'Here');
+    console.error(e, 'Here');
     router.start();
     if (isProtectedRoute) {
       router.go(Routes.Login);

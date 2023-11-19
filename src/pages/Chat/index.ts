@@ -108,7 +108,7 @@ class Chat extends Block {
             type: 'get old',
           });
         }).catch((e) => {
-          console.log(e);
+          console.error(e);
         });
         this.ws.on(WSTransportEvents.Message, (message) => {
           if (Array.isArray(message)) {

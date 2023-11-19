@@ -16,7 +16,7 @@ class AuthController {
       await this.fetchUser();
       router.go(Routes.Chat);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
@@ -27,7 +27,7 @@ class AuthController {
 
       router.go(Routes.Chat);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
@@ -38,7 +38,7 @@ class AuthController {
 
       router.go(Routes.Login);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 }
