@@ -12,7 +12,6 @@ import Routes from './enum/routes';
 
 window.addEventListener('DOMContentLoaded', async () => {
   router
-    .use(Routes.Index, Login)
     .use(Routes.Chat, Chat)
     .use(Routes.ErrorPage, ErrorPage)
     .use(Routes.Login, Login)
@@ -24,7 +23,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   let isProtectedRoute = true;
 
   switch (window.location.pathname) {
-    case Routes.Index:
     case Routes.Login:
     case Routes.Register:
       isProtectedRoute = false;
@@ -48,10 +46,10 @@ window.addEventListener('DOMContentLoaded', async () => {
       router.go(window.location.pathname);
     }
   } catch (e) {
-    console.log(e, 'Here');
+    console.error(e, 'Here');
     router.start();
     if (isProtectedRoute) {
-      router.go(Routes.Index);
+      router.go(Routes.Login);
     }
   }
 });

@@ -25,7 +25,7 @@ const tmpl = (classes: Record<string, string>, arrowUrl: string) => `
               {{{removeUserButton}}}
             </div>
             {{#if messages}}
-              <div class="${classes.fullChat}">
+              <div class="${classes.fullChat}" id="chatsList">
                 {{{messages}}}
               </div>
             {{else}}

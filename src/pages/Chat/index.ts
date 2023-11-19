@@ -15,9 +15,12 @@ import AddUserDailog from './AddUserDialog';
 import Message from './Message';
 import RemoveUserDailog from './RemoveUserDialog';
 import withStore from '../../core/Store/withStore';
+import Routes from '../../enum/routes';
 
 class Chat extends Block {
   ws: WSTransport | undefined;
+
+  chatToken: string = '';
 
   constructor() {
     super({
@@ -29,7 +32,7 @@ class Chat extends Block {
   init(): void {
     this.children.linkProfile = new Link({
       text: 'Профиль',
-      href: '/profile',
+      href: Routes.Profile,
     });
     this.children.inputSearch = new Input({
       variant: 'filled',
@@ -93,17 +96,26 @@ class Chat extends Block {
   chatConnect(id: string): void {
     store.setState('messages', []);
     store.on(StoreEvents.Update, (value: IState) => {
-      if (value.chatToken) {
+      if (value.chatToken && value.chatToken !== this.chatToken) {
+        this.chatToken = value.chatToken;
         if (this.ws) {
           this.ws.close();
         }
         this.ws = new WSTransport(`/chats/${value.user?.id}/${id}/${value.chatToken}`);
         this.ws.connected().then(() => {
+          this.ws?.send({
+            content: '0',
+            type: 'get old',
+          });
         }).catch((e) => {
-          console.log(e);
+          console.error(e);
         });
         this.ws.on(WSTransportEvents.Message, (message) => {
-          store.setState('messages', (store.getState().messages || [])?.concat(message));
+          if (Array.isArray(message)) {
+            store.setState('messages', message.reverse());
+          } else {
+            store.setState('messages', (store.getState().messages || [])?.concat(message));
+          }
         });
       }
     });
@@ -118,19 +130,21 @@ class Chat extends Block {
           ...chat,
           active: chat.id === this.props.activeDialog,
           events: {
-            click: () => {
-              this.setProps({ activeDialog: chat.id });
-              (this.children.chatDialogs as Block[])[i].setProps({
-                active: true,
-              });
-              (this.children.addUserButton as Block).setProps({
-                disabled: false,
-              });
-              (this.children.removeUserButton as Block).setProps({
-                disabled: false,
-              });
-              store.setState('chatId', chat.id);
-              this.chatConnect(chat.id);
+            click: (event) => {
+              if ((event.target as HTMLElement).localName !== 'label') {
+                this.setProps({ activeDialog: chat.id });
+                (this.children.chatDialogs as Block[])[i].setProps({
+                  active: true,
+                });
+                (this.children.addUserButton as Block).setProps({
+                  disabled: false,
+                });
+                (this.children.removeUserButton as Block).setProps({
+                  disabled: false,
+                });
+                store.setState('chatId', chat.id);
+                this.chatConnect(chat.id);
+              }
             },
           },
         }));
@@ -142,6 +156,15 @@ class Chat extends Block {
             text: message.content,
             isCurrentUser: message.user_id === this.props.user.id,
           })));
+        const timeoutId = setTimeout(() => {
+          if (window.document.getElementById('chatsList')
+            && window.document.getElementById('chatsList')?.scrollHeight) {
+            window.document.getElementById('chatsList')?.scrollTo({
+              top: window.document.getElementById('chatsList')?.scrollHeight,
+            });
+          }
+          clearTimeout(timeoutId);
+        });
       }
     });
     ChatController.getChats();

@@ -88,7 +88,7 @@ class ProfileForm extends Form {
       variant: 'text',
       events: {
         click: () => {
-          router.go('/chat');
+          router.go(Routes.Chat);
         },
       },
     });

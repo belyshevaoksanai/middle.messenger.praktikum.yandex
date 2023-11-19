@@ -8,7 +8,7 @@ class ChatController {
 
       store.setState('chats', chats);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
@@ -17,7 +17,7 @@ class ChatController {
       await chatApi.createChat(value);
       await this.getChats();
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
@@ -27,7 +27,7 @@ class ChatController {
 
       store.setState('chatToken', chatToken.token);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
@@ -35,7 +35,7 @@ class ChatController {
     try {
       await chatApi.addUserInChat(data);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
@@ -43,7 +43,16 @@ class ChatController {
     try {
       await chatApi.removeUserInChat(data);
     } catch (e) {
-      console.log(e);
+      console.error(e);
+    }
+  }
+
+  static async updateAvatar(data: FormData) {
+    try {
+      await chatApi.updateAvatar(data);
+      await this.getChats();
+    } catch (e) {
+      console.error(e);
     }
   }
 }

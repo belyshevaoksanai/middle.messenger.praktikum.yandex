@@ -9,7 +9,7 @@ class UserController {
       await userApi.updateProfile(data);
       await AuthController.fetchUser();
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
@@ -18,7 +18,7 @@ class UserController {
       await userApi.updateAvatar(data);
       await AuthController.fetchUser();
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
@@ -28,7 +28,7 @@ class UserController {
 
       router.go(Routes.Profile);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 }

@@ -2,6 +2,7 @@ import tmpl from './ErrorPage.tmpl';
 import classes from './ErrorPage.module.scss';
 import Link from '../../components/Link';
 import Block from '../../core/Block/block';
+import Routes from '../../enum/routes';
 
 class ErrorPage extends Block {
   constructor() {
@@ -12,7 +13,7 @@ class ErrorPage extends Block {
 
   init(): void {
     this.children.link = new Link({
-      href: '/chat',
+      href: Routes.Chat,
       text: 'Назад к чатам',
     });
   }
