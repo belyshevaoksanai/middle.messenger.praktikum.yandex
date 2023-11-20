@@ -95,31 +95,6 @@ class Chat extends Block {
 
   chatConnect(id: string): void {
     store.setState('messages', []);
-    store.on(StoreEvents.Update, (value: IState) => {
-      if (value.chatToken && value.chatToken !== this.chatToken) {
-        this.chatToken = value.chatToken;
-        if (this.ws) {
-          this.ws.close();
-        }
-        this.ws = new WSTransport(`/chats/${value.user?.id}/${id}/${value.chatToken}`);
-        this.ws.connected().then(() => {
-          this.ws?.send({
-            content: '0',
-            type: 'get old',
-          });
-        }).catch((e) => {
-          console.error(e);
-        });
-        this.ws.on(WSTransportEvents.Message, (message) => {
-          if (Array.isArray(message)) {
-            store.setState('messages', message.reverse());
-          } else {
-            store.setState('messages', (store.getState().messages || [])?.concat(message));
-          }
-        });
-      }
-    });
-
     ChatController.getChatToken(id);
   }
 
@@ -148,6 +123,29 @@ class Chat extends Block {
             },
           },
         }));
+      }
+
+      if (value.chatToken && value.chatToken !== this.chatToken) {
+        this.chatToken = value.chatToken;
+        if (this.ws) {
+          this.ws.close();
+        }
+        this.ws = new WSTransport(`/chats/${value.user?.id}/${value.chatId}/${value.chatToken}`);
+        this.ws.connected().then(() => {
+          this.ws?.send({
+            content: '0',
+            type: 'get old',
+          });
+        }).catch((e) => {
+          console.error(e);
+        });
+        this.ws.on(WSTransportEvents.Message, (message) => {
+          if (Array.isArray(message)) {
+            store.setState('messages', message.reverse());
+          } else {
+            store.setState('messages', (store.getState().messages || [])?.concat(message));
+          }
+        });
       }
 
       if (value.messages) {
