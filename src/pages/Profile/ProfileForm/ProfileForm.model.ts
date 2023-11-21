@@ -1,4 +1,5 @@
 interface ProfileFormModel {
+  avatar?: any;
   email: string;
   login: string;
   first_name: string;

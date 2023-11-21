@@ -1,11 +1,11 @@
 Мессенджер выполняется на курсах "Мидл фронтенд-разработчик"
 
 Ссылки на развернутое приложение:
-https://yandex-praktikum-chat.onrender.com/profile
+https://yandex-praktikum-chat.onrender.com/
+https://yandex-praktikum-chat.onrender.com/settings
 https://yandex-praktikum-chat.onrender.com/password
-https://yandex-praktikum-chat.onrender.com/chat
-https://yandex-praktikum-chat.onrender.com/login
-https://yandex-praktikum-chat.onrender.com/registration
+https://yandex-praktikum-chat.onrender.com/messenger
+https://yandex-praktikum-chat.onrender.com/sign-up
 https://yandex-praktikum-chat.onrender.com/not-found
 https://yandex-praktikum-chat.onrender.com/error-page
 
@@ -42,3 +42,16 @@ npm run stylelint-fix - фикс ошибок StyleLint
 - добавление аватара пользователя;
 - выйти из аккаунта;
 - валидация форм.
+
+Ссылки на документацию по используемому API:
+https://ya-praktikum.tech/api/v2/swagger/#/Chats/delete_chats_users
+https://ya-praktikum.tech/api/v2/openapi/ws
+
+Реализован класс Router, отвечающий за роутинг в приложение (используется API History)
+Класс httpTransport является "оберткой" для использования XMLHttpRequest, аналогично создан класс для работы с WS wsTransport.
+За хранение данных и передачу между компонентами отвечает Store, для подключения к нему используется функция withStore.
+
+Тестовые пользователи:
+okurnosova2/11111111A
+okurnosova6/12345678Qq!
+

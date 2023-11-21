@@ -1,6 +1,6 @@
-const tmpl = (classes: Record<string, string>, editAvatar: string) => `
+const tmpl = (classes: Record<string, string>) => `
     <div class="${classes.titleContainer}">
-        <img src="${editAvatar}"/>
+        {{{inputAvatar}}}
         <span>{{{title}}}</span>
     </div>
     <div class="${classes.registrationForm}">
@@ -14,6 +14,7 @@ const tmpl = (classes: Record<string, string>, editAvatar: string) => `
     <div class="${classes.actionContainer}">
         {{{buttonChangeData}}}
         {{{buttonChangePassword}}}
+        {{{buttonToChat}}}
         {{{buttonExit}}}
     </div>
 `;

@@ -1,5 +1,5 @@
 import TypeWithClass from '../../../models/block-helpers';
-import Block from '../../../utils/block';
+import Block from '../../../core/Block/block';
 import classes from './Error.module.scss';
 
 interface InputErrorProps {
@@ -8,14 +8,14 @@ interface InputErrorProps {
 
 class InputError extends Block<TypeWithClass<InputErrorProps>> {
   constructor(props: InputErrorProps) {
-    super('span', {
+    super({
       ...props,
       class: classes.error,
     });
   }
 
   render() {
-    return this.compile('{{text}}', this.props);
+    return this.compile('<span class="{{class}}">{{text}}</span>', this.props);
   }
 }
 

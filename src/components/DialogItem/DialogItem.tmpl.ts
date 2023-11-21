@@ -1,9 +1,8 @@
-const tmpl = (classes: Record<string, string>, emtyAvatarUrl: string) => `
-    <div class="${classes.dialogContainer}">
-        <img src="${emtyAvatarUrl}" />
+const tmpl = (classes: Record<string, string>) => `
+    <div class="${classes.dialogContainer}" {{#if active}}style="background:#E4EDFD;"{{else}}''{{/if}}>
+        {{{inputAvatar}}}
         <div class="${classes.dialogInfo}">
-            <span class="${classes.dialogTitle}">{{name}}</span>
-            <span class="${classes.dialogMessage}">{{text}}</span>
+            <span class="${classes.dialogTitle}">{{title}}</span>
         </div>
     </div>
 `;

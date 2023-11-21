@@ -3,10 +3,12 @@ import classes from './LoginForm.module.scss';
 import Title from '../../../components/Title';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
-import LinkButton from '../../../components/LinkButton';
 import Form from '../../../components/Form';
 import { required } from '../../../utils/validate';
-import LoginFormModel from './LoginForm.model';
+import AuthController from '../../../controllers/authController';
+import { ISigninData } from '../../../api/authApi';
+import router from '../../../core/Router/router';
+import Routes from '../../../enum/routes';
 
 class LoginForm extends Form {
   init(): void {
@@ -19,25 +21,30 @@ class LoginForm extends Form {
     this.children.inputPassword = new Input({
       label: 'Пароль',
       name: 'password',
+      type: 'password',
       validate: required,
     });
     this.children.buttonAuth = new Button({
       label: 'Авторизоваться',
     });
-    this.children.buttonRegistration = new LinkButton({
+    this.children.buttonRegistration = new Button({
       label: 'Нет аккаунта?',
       variant: 'text',
-      href: '/registration',
+      type: 'button',
+      events: {
+        click: () => {
+          router.go(Routes.Register);
+        },
+      },
     });
   }
 
-  submit(values: LoginFormModel): void {
-    console.log('form value:');
-    console.log(values);
+  submit(values: ISigninData): void {
+    AuthController.signin(values);
   }
 
-  protected render(): DocumentFragment {
-    return this.compile(tmpl(classes), this.props);
+  renderForm(): string {
+    return tmpl(classes);
   }
 }
 
