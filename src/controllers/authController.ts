@@ -1,5 +1,5 @@
 import authApi, { ISigninData, ISignupData } from '../api/authApi';
-import router from '../core/Router/router';
+import Router from '../core/Router/router';
 import store from '../core/Store';
 import Routes from '../enum/routes';
 
@@ -14,7 +14,7 @@ class AuthController {
     try {
       await authApi.signin(data);
       await this.fetchUser();
-      router.go(Routes.Chat);
+      Router.go(Routes.Chat);
     } catch (e) {
       console.error(e);
     }
@@ -25,7 +25,7 @@ class AuthController {
       await authApi.signup(data);
       await this.fetchUser();
 
-      router.go(Routes.Chat);
+      Router.go(Routes.Chat);
     } catch (e) {
       console.error(e);
     }
@@ -36,7 +36,7 @@ class AuthController {
       await authApi.logout();
       store.setState('user', undefined);
 
-      router.go(Routes.Login);
+      Router.go(Routes.Login);
     } catch (e) {
       console.error(e);
     }

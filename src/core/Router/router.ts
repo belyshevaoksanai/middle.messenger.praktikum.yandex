@@ -2,7 +2,9 @@ import Block from '../Block/block';
 import Route from './route';
 
 class Router {
-  private static __instance: Router;
+  private static __instance: Router | null = null;
+
+  private readonly rootQuery = '#app';
 
   public routes: Route[] = [];
 
@@ -10,28 +12,34 @@ class Router {
 
   private currentRoute: Route | null = null;
 
-  constructor(private readonly rootQuery: string) {
+  static getInstance(): Router {
     if (!Router.__instance) {
-      Router.__instance = this;
+      Router.__instance = new Router();
+      return Router.__instance;
     }
+    return this.__instance as Router;
   }
 
-  public use(pathname: string, block: typeof Block) {
-    const route = new Route(pathname, block, { rootQuery: this.rootQuery });
+  static destroy(): void {
+    this.__instance = null;
+  }
 
-    this.routes.push(route);
+  public static use(pathname: string, block: typeof Block) {
+    const route = new Route(pathname, block, { rootQuery: this.getInstance().rootQuery });
+
+    this.getInstance().routes.push(route);
     return this;
   }
 
-  public start() {
+  public static start() {
     // Реагируем на изменения в адресной строке и вызываем перерисовку
     window.onpopstate = (event: PopStateEvent) => {
       if (event.currentTarget) {
-        this._onRoute((event.currentTarget as Window).location.pathname);
+        this.getInstance()._onRoute((event.currentTarget as Window).location.pathname);
       }
     };
 
-    this._onRoute(window.location.pathname);
+    this.getInstance()._onRoute(window.location.pathname);
   }
 
   private _onRoute(pathname: string) {
@@ -50,9 +58,9 @@ class Router {
     route.render();
   }
 
-  go(pathname: string) {
-    this.history.pushState({}, '', pathname);
-    this._onRoute(pathname);
+  static go(pathname: string) {
+    this.getInstance().history.pushState({}, '', pathname);
+    this.getInstance()._onRoute(pathname);
   }
 
   getRoute(pathname: string) {
@@ -68,6 +76,4 @@ class Router {
   }
 }
 
-const router = new Router('#app');
-
-export default router;
+export default Router;

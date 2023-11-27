@@ -2,5 +2,6 @@
 **/*.min.js
 /node_modules
 /src/utils.component.ts
+/*.config.ts
 /dist
 /server.js

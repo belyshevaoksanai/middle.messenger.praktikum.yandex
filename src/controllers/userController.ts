@@ -1,5 +1,5 @@
 import userApi, { IPasswordUpdateData, IUserUpdateData } from '../api/userApi';
-import router from '../core/Router/router';
+import Router from '../core/Router/router';
 import Routes from '../enum/routes';
 import AuthController from './authController';
 
@@ -26,7 +26,7 @@ class UserController {
     try {
       await userApi.updatePassword(data);
 
-      router.go(Routes.Profile);
+      Router.go(Routes.Profile);
     } catch (e) {
       console.error(e);
     }

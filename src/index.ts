@@ -6,12 +6,12 @@ import Password from './pages/Password';
 import Profile from './pages/Profile';
 import Registration from './pages/Registration';
 import './reset.scss';
-import router from './core/Router/router';
+import Router from './core/Router/router';
 import AuthController from './controllers/authController';
 import Routes from './enum/routes';
 
 window.addEventListener('DOMContentLoaded', async () => {
-  router
+  Router
     .use(Routes.Chat, Chat)
     .use(Routes.ErrorPage, ErrorPage)
     .use(Routes.Login, Login)
@@ -31,8 +31,8 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   if (!Object.values(Routes).includes(window.location.pathname as Routes)) {
-    router.start();
-    router.go(Routes.NotFound);
+    Router.start();
+    Router.go(Routes.NotFound);
 
     return;
   }
@@ -40,16 +40,16 @@ window.addEventListener('DOMContentLoaded', async () => {
   try {
     await AuthController.fetchUser();
 
-    router.start();
+    Router.start();
 
     if (!isProtectedRoute) {
-      router.go(window.location.pathname);
+      Router.go(window.location.pathname);
     }
   } catch (e) {
     console.error(e, 'Here');
-    router.start();
+    Router.start();
     if (isProtectedRoute) {
-      router.go(Routes.Login);
+      Router.go(Routes.Login);
     }
   }
 });

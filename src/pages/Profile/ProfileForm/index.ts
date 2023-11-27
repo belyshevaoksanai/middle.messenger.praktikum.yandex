@@ -9,7 +9,7 @@ import {
 } from '../../../utils/validate';
 import ProfileFormModel from './ProfileForm.model';
 import AuthController from '../../../controllers/authController';
-import router from '../../../core/Router/router';
+import Router from '../../../core/Router/router';
 import store, { IState, StoreEvents } from '../../../core/Store';
 import Block from '../../../core/Block/block';
 import UserController from '../../../controllers/userController';
@@ -70,7 +70,7 @@ class ProfileForm extends Form {
       variant: 'text',
       events: {
         click: () => {
-          router.go(Routes.Password);
+          Router.go(Routes.Password);
         },
       },
     });
@@ -88,7 +88,7 @@ class ProfileForm extends Form {
       variant: 'text',
       events: {
         click: () => {
-          router.go(Routes.Chat);
+          Router.go(Routes.Chat);
         },
       },
     });
