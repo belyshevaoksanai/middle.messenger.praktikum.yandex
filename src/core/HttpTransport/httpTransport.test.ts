@@ -16,8 +16,7 @@ describe('HTTP Trnasport', () => {
   beforeEach(() => {
     xhr = sinon.useFakeXMLHttpRequest();
 
-    // @ts-ignore
-    global.XMLHttpRequest = xhr;
+    global.XMLHttpRequest = xhr as any;
 
     xhr.onCreate = function (req) {
       requests.push(req);
