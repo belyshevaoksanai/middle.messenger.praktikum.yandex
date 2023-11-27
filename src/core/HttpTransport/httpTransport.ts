@@ -1,3 +1,5 @@
+import queryStringify from '../../utils/queryStringify';
+
 enum METHOD {
   GET = 'GET',
   POST = 'POST',
@@ -23,15 +25,12 @@ type HTTPMethod<Data> = <TResponse>(
 
 type DataType = Record<string, any>;
 
-function queryStringify(data?: DataType) {
+function getQuery(data?: DataType) {
   if (!data) {
     return '';
   }
 
-  return `?${Object
-    .keys(data)
-    .map((key) => `${key}=${data[key].toString()}`)
-    .join('&')}`;
+  return `?${queryStringify(data)}`;
 }
 
 class HTTPTransport<Data extends DataType> {
@@ -79,7 +78,7 @@ class HTTPTransport<Data extends DataType> {
   }
 
   get: HTTPMethod<Data> = (url, options = {}) => this.request(
-    `${url}${queryStringify(options.data)}`,
+    `${url}${getQuery(options.data)}`,
     { ...options, method: METHOD.GET },
   );
 

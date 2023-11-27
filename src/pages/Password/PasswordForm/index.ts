@@ -6,7 +6,7 @@ import Button from '../../../components/Button';
 import Form from '../../../components/Form';
 import { required, validatePassword } from '../../../utils/validate';
 import PasswordFormModel from './PasswordForm.model';
-import router from '../../../core/Router/router';
+import Router from '../../../core/Router/router';
 import UserController from '../../../controllers/userController';
 import AvatarInput from '../../../components/AvatarInput';
 import AuthController from '../../../controllers/authController';
@@ -44,7 +44,7 @@ class PasswordForm extends Form {
       type: 'button',
       events: {
         click: () => {
-          router.go(Routes.Profile);
+          Router.go(Routes.Profile);
         },
       },
     });

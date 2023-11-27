@@ -9,7 +9,7 @@ import {
 } from '../../../utils/validate';
 import AuthController from '../../../controllers/authController';
 import { ISignupData } from '../../../api/authApi';
-import router from '../../../core/Router/router';
+import Router from '../../../core/Router/router';
 import Routes from '../../../enum/routes';
 
 class RegistrationForm extends Form {
@@ -61,7 +61,7 @@ class RegistrationForm extends Form {
       type: 'button',
       events: {
         click: () => {
-          router.go(Routes.Login);
+          Router.go(Routes.Login);
         },
       },
     });

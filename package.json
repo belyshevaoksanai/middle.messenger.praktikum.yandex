@@ -2,32 +2,48 @@
   "name": "middle.messenger.praktikum.yandex",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
-    "start": "tsc && vite build && node server.js",
+    "start": "tsc && vite build && node server.mjs",
     "prebuild": "tsc --noEmit",
     "build": "npm run prebuild && vite build",
     "preview": "vite preview",
+    "test": "mocha --require ts-node/register --require ./mochaSetup.cjs './src/**/*.test.ts'",
     "eslint-check": "eslint . --ext .ts,.js",
     "eslint-fix": "eslint . --ext .ts,.js --fix",
     "stylelint-check": "npx stylelint \"**/*.scss\"",
-    "stylelint-fix": "npx stylelint \"**/*.scss\" --fix"
+    "stylelint-fix": "npx stylelint \"**/*.scss\" --fix",
+    "check": "npm-run-all eslint-check stylelint-check",
+    "fix": "npm-run-all eslint-fix stylelint-fix",
+    "prepare": "husky install",
+    "pre-commit": "npm-run-all test check"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.11",
+    "@types/mocha": "^10.0.6",
     "@types/node": "^20.8.3",
+    "@types/sinon": "^17.0.2",
+    "@types/sinon-chai": "^3.2.12",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
+    "chai": "^4.3.10",
     "eslint": "^8.51.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.1.0",
     "express": "^4.18.2",
+    "husky": "^8.0.3",
+    "jsdom": "^22.1.0",
+    "mocha": "^10.2.0",
+    "npm-run-all": "^4.1.5",
     "postcss-scss": "^4.0.9",
     "sass": "^1.68.0",
+    "sinon": "^17.0.1",
+    "sinon-chai": "^3.7.0",
     "stylelint": "^15.10.3",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-scss": "^5.2.1",
-    "typescript": "^5.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2",
     "vite": "^4.4.5"
   },
   "dependencies": {
@@ -38,5 +54,10 @@
   },
   "engines": {
     "node": ">=16.18.1 <=20.8.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all test check"
+    }
   }
 }
