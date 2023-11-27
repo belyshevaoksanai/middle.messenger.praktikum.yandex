@@ -18,6 +18,7 @@ npm run eslint-check - запуск проверок ESLint
 npm run eslint-fix - фикс ошибок ESLint
 npm run stylelint-check - запуск проверок StyleLint
 npm run stylelint-fix - фикс ошибок StyleLint
+npm run test - запуск unit тестов
 
 Используемые технологии:
 - Язык программирования JS, TS
@@ -50,6 +51,10 @@ https://ya-praktikum.tech/api/v2/openapi/ws
 Реализован класс Router, отвечающий за роутинг в приложение (используется API History)
 Класс httpTransport является "оберткой" для использования XMLHttpRequest, аналогично создан класс для работы с WS wsTransport.
 За хранение данных и передачу между компонентами отвечает Store, для подключения к нему используется функция withStore.
+
+Unit тесты написаны с использованием Mocha и Chai.
+
+На precommit выполняются скрипты test и check при помощи пакета husky.
 
 Тестовые пользователи:
 okurnosova2/11111111A
